@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:24:49 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/03 13:09:24 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:07:58 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_check_infile(char *infile)
 	if (fd == -1 || len < 5)
 		exit(1); //ft_exit();
 	close(fd);
-	if (!ft_strncmp(&infile[len - 4], ".cub", 5) || infile[len - 5] != '/')
+	if (ft_strncmp(&infile[len - 4], ".cub", 5) || infile[len - 5] == '/')
 		exit(1);
 }
 
@@ -50,19 +50,37 @@ int	ft_substrlen(char *str)
 	int	i;
 
 	i = 0;
-	while (str && str[i] != '\0' && str[i] != ' ' && str[i] != '\n')
+	while (str && str[i] != '\0' && str[i] != 32 && str[i] != '\n')
 		i++;
 	return (i);
+}
+
+void	ft_fc_color_next(char *mapmem, int *i, int bits)
+{
+	while (ft_isdigit(mapmem[*i]))
+		*i = *i + 1;
+	if (mapmem[*i] == ',')
+		*i = *i + 1;
+	else if (bits < 0 && (mapmem[*i] == 32 || mapmem[*i] == '\n'))
+	{
+		while (mapmem[*i] == 32)
+			*i = *i + 1;
+	}
+	else
+		exit(1); //ft_exit_map
 }
 
 void	ft_get_fc_color(char *mapmem, int *i, int *color)
 {
 	int	times;
 	int	atoi;
-	int	mult;
+	int	bits;
 
+	if (*color != -1)
+		exit(1); //ft_exit_map
+	*color = 0;
 	times = 0;
-	mult = 1000000;
+	bits = 16;
 	*i = *i + 1;
 	while (mapmem[*i] == 32)
 		*i = *i + 1;
@@ -71,23 +89,18 @@ void	ft_get_fc_color(char *mapmem, int *i, int *color)
 		atoi = ft_atoi(&mapmem[*i]);
 		if (atoi < 0 || atoi > 255)
 			exit(1); //ft_exit_map
-		*color += atoi * mult;
-		mult /= 1000;
-		while (ft_isdigit(mapmem[*i]))
-			*i = *i + 1;
-		if (mapmem[*i] == ',' ||
-			(!mult && (mapmem[*i] == ' ' || mapmem[*i] == '\n')))
-			*i = *i + 1;
-		else
-			exit(1); //ft_exit_map
+		*color |= atoi << bits;
+		bits -= 8;
+		ft_fc_color_next(mapmem, i, bits);
 	}
 }
-
 
 void	ft_wallimage_path(char *mapmem, int *i, char **wallpath)
 {
 	int	j;
 
+	if (*wallpath)
+		exit(1); //ft_exit_map (duplcate rule)
 	j = 0;
 	*i = *i + 2;
 	while (mapmem[*i] == 32)
@@ -95,14 +108,23 @@ void	ft_wallimage_path(char *mapmem, int *i, char **wallpath)
 	*wallpath = ft_calloc(ft_substrlen(&mapmem[*i]) + 1, sizeof(char));
 	if (!*wallpath)
 		exit(1); //ft_exit_map
-	while (mapmem[*i] != '\0' && mapmem[*i] != ' ' && mapmem[*i] != '\n')
+	while (mapmem[*i] != '\0' && mapmem[*i] != 32 && mapmem[*i] != '\n')
 	{
-		*wallpath[j] = mapmem[*i];
+		(*wallpath)[j] = mapmem[*i];
 		*i = *i + 1;
 		j++;
 	}
 	while (mapmem[*i] == ' ')
 		*i = *i + 1;
+}
+
+int	ft_isallset(t_map *map)
+{
+	if (!map->no_file || !map->so_file || !map->we_file || !map->ea_file)
+		return (0);
+	if (map->floor_color == -1 || map->cieling_color == -1)
+		return (0);
+	return (1);
 }
 
 void	ft_set_config(t_map *map)
@@ -112,6 +134,8 @@ void	ft_set_config(t_map *map)
 	i = 0;
 	while (map->map_memory[i])
 	{
+		while (map->map_memory[i] == '\n')
+			i++;
 		if (!ft_strncmp(&map->map_memory[i], "NO ", 3))
 			ft_wallimage_path(map->map_memory, &i, &map->no_file);
 		else if (!ft_strncmp(&map->map_memory[i], "SO ", 3))
@@ -126,9 +150,9 @@ void	ft_set_config(t_map *map)
 			ft_get_fc_color(map->map_memory, &i, &map->cieling_color);
 		else
 			break ;
-		while (map->map_memory[i] == '\n')
-			i++;
 	}
+	if (!ft_isallset(map))
+		exit(1); //ft_exit_map
 }
 
 void	ft_init_map(t_map *map)
@@ -138,15 +162,34 @@ void	ft_init_map(t_map *map)
 	map->so_file = NULL;
 	map->we_file = NULL;
 	map->ea_file = NULL;
-	map->floor_color = 0;
-	map->cieling_color = 0;
+	map->floor_color = -1;
+	map->cieling_color = -1;
 }
 
 /* pass &map and av[1] */
 void	ft_get_map(t_map *map, char *filename)
 {
 	ft_check_infile(filename);
+	printf("ok check\n");
 	ft_init_map(map);
-	ft_read_map(map);
+	printf("ok init\n");
+	ft_read_map(map, filename);
+	printf("ok read\n");
 	ft_set_config(map);
+	printf("ok set\n");
+}
+
+int	main(int ac, char **av)
+{
+	t_map	map;
+
+	if (ac != 2)
+		return (1);
+	ft_get_map(&map, av[1]);
+	printf("NO -> '%s'\n", map.no_file);
+	printf("SO -> '%s'\n", map.so_file);
+	printf("WE -> '%s'\n", map.we_file);
+	printf("EA -> '%s'\n", map.ea_file);
+	printf("F  -> '%d'\n", map.floor_color);
+	printf("C  -> '%d'\n", map.cieling_color);
 }
