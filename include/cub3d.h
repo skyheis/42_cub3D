@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 10:56:02 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/03 14:17:49 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:03:00 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,17 @@ typedef struct s_dot
 
 typedef struct s_map
 {
+	char	**map;
 	char	*map_memory;
+	int		width;
+	int		hight;
 	char	*no_file;;
 	char	*so_file;;
 	char	*we_file;;
 	char	*ea_file;;
 	int		floor_color;
 	int		cieling_color;
+	int		player[3];
 }				t_map;
 
 typedef struct s_data
@@ -69,7 +73,15 @@ typedef struct s_mlxvars
 	t_map	*map;
 }				t_mlxvars;
 
-/* map */
+/* map map_utils map_split*/
+char	**ft_splitmap(t_map *map, char *onlymap);
+int		ft_substrlen(char *str);
+int		ft_isallset(t_map *map);
+void	ft_get_fc_color(char *mapmem, int *i, int *color);
+void	ft_wallimage_path(char *mapmem, int *i, char **wallpath);
 void	ft_get_map(t_map *map, char *filename);
+
+/* check_player */
+void	ft_findplayer(t_map *map);
 
 #endif

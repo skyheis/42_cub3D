@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:24:49 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/03 18:07:58 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:02:04 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,89 +45,7 @@ void	ft_read_map(t_map *map, char *file)
 	close(fd);
 }
 
-int	ft_substrlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i] != '\0' && str[i] != 32 && str[i] != '\n')
-		i++;
-	return (i);
-}
-
-void	ft_fc_color_next(char *mapmem, int *i, int bits)
-{
-	while (ft_isdigit(mapmem[*i]))
-		*i = *i + 1;
-	if (mapmem[*i] == ',')
-		*i = *i + 1;
-	else if (bits < 0 && (mapmem[*i] == 32 || mapmem[*i] == '\n'))
-	{
-		while (mapmem[*i] == 32)
-			*i = *i + 1;
-	}
-	else
-		exit(1); //ft_exit_map
-}
-
-void	ft_get_fc_color(char *mapmem, int *i, int *color)
-{
-	int	times;
-	int	atoi;
-	int	bits;
-
-	if (*color != -1)
-		exit(1); //ft_exit_map
-	*color = 0;
-	times = 0;
-	bits = 16;
-	*i = *i + 1;
-	while (mapmem[*i] == 32)
-		*i = *i + 1;
-	while (times++ < 3)
-	{
-		atoi = ft_atoi(&mapmem[*i]);
-		if (atoi < 0 || atoi > 255)
-			exit(1); //ft_exit_map
-		*color |= atoi << bits;
-		bits -= 8;
-		ft_fc_color_next(mapmem, i, bits);
-	}
-}
-
-void	ft_wallimage_path(char *mapmem, int *i, char **wallpath)
-{
-	int	j;
-
-	if (*wallpath)
-		exit(1); //ft_exit_map (duplcate rule)
-	j = 0;
-	*i = *i + 2;
-	while (mapmem[*i] == 32)
-		*i = *i + 1;
-	*wallpath = ft_calloc(ft_substrlen(&mapmem[*i]) + 1, sizeof(char));
-	if (!*wallpath)
-		exit(1); //ft_exit_map
-	while (mapmem[*i] != '\0' && mapmem[*i] != 32 && mapmem[*i] != '\n')
-	{
-		(*wallpath)[j] = mapmem[*i];
-		*i = *i + 1;
-		j++;
-	}
-	while (mapmem[*i] == ' ')
-		*i = *i + 1;
-}
-
-int	ft_isallset(t_map *map)
-{
-	if (!map->no_file || !map->so_file || !map->we_file || !map->ea_file)
-		return (0);
-	if (map->floor_color == -1 || map->cieling_color == -1)
-		return (0);
-	return (1);
-}
-
-void	ft_set_config(t_map *map)
+int	ft_set_config(t_map *map)
 {
 	int	i;
 
@@ -153,11 +71,15 @@ void	ft_set_config(t_map *map)
 	}
 	if (!ft_isallset(map))
 		exit(1); //ft_exit_map
+	return (i);
 }
 
 void	ft_init_map(t_map *map)
 {
 	map->map_memory = NULL;
+	map->map = NULL;
+	map->width = 0;
+	map->hight = 0;
 	map->no_file = NULL;
 	map->so_file = NULL;
 	map->we_file = NULL;
@@ -169,14 +91,31 @@ void	ft_init_map(t_map *map)
 /* pass &map and av[1] */
 void	ft_get_map(t_map *map, char *filename)
 {
+	int		i;
+
 	ft_check_infile(filename);
 	printf("ok check\n");
 	ft_init_map(map);
 	printf("ok init\n");
 	ft_read_map(map, filename);
 	printf("ok read\n");
-	ft_set_config(map);
+	i = ft_set_config(map);
 	printf("ok set\n");
+	map->map = ft_splitmap(map, &map->map_memory[i]);
+	ft_free_null(&map->map_memory);
+	ft_findplayer(map);
+}
+
+void	ft_printmatrix(char **mat)
+{
+	int	y;
+
+	y = 0;
+	while (mat && mat[y])
+	{
+		ft_printf("%s", mat[y]);
+		y++;
+	}
 }
 
 int	main(int ac, char **av)
@@ -192,4 +131,8 @@ int	main(int ac, char **av)
 	printf("EA -> '%s'\n", map.ea_file);
 	printf("F  -> '%d'\n", map.floor_color);
 	printf("C  -> '%d'\n", map.cieling_color);
+	printf("width '%i'\n", map.width);
+	printf("hight '%i'\n", map.hight);
+	printf("player:\nx %i\ny %i\nv %c\n", map.player[0], map.player[1], (char) map.player[2]);
+	ft_printmatrix(map.map);
 }
