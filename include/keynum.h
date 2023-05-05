@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 12:38:42 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/02/07 15:31:50 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/05 23:45:05 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # define B_ESC 65307
 # define MIN_KEY 45
 # define MAG_KEY 61
+
+#define UP 65362
+#define LEFT 65361
+#define RIGHT 65363
+#define DOWN 65364
 
 # define W_KEY 119
 # define A_KEY 97

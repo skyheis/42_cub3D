@@ -6,16 +6,16 @@
 /*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 18:08:32 by gfantech          #+#    #+#             */
-/*   Updated: 2023/05/05 18:08:36 by gfantech         ###   ########.fr       */
+/*   Updated: 2023/05/05 19:13:58 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-int	create_trgb(int t, int r, int g, int b)
+/*int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
-}
+}*/
 
 void	destroy(t_vars *vars)
 {

@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:24:49 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/05 11:17:15 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/05 23:37:46 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	ft_printmatrix(char **mat)
 	}
 }
 
-int	main(int ac, char **av)
+/*int	main(int ac, char **av)
 {
 	t_map	map;
 
@@ -141,4 +141,4 @@ int	main(int ac, char **av)
 	printf("hight '%i'\n", map.hight);
 	printf("player:\nx %i\ny %i\nv %c\n", map.player[0], map.player[1], (char) map.player[2]);
 	ft_printmatrix(map.map);
-}
+}*/

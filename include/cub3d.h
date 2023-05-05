@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 10:56:02 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/05 10:33:53 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/05 23:33:37 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 # define CUB3D_H
 
 # include "libft.h"
-# include "get_next_line.h"
-# include "libftprintf.h"
 # include "mlx.h"
 # include "keynum.h"
+# include "engine.h"
 # include <math.h>
+# include <mlx.h> //????
+# include <sys/time.h>
+# include <stdbool.h>
 
-# define WIN_WIDE 1920
-# define WIN_HEIGHT 995
+# define WIN_WIDTH 1080 //1920
+# define WIN_HEIGHT 720 //995
 
 # define READ_SIZE	100000
 
@@ -33,44 +35,15 @@
 # define MAXX 2
 # define MAXY 3
 
-typedef struct s_dot
-{
-	float	x;
-	float	y;
-	int		z;
-	int		col;
-}				t_dot;
-
-typedef struct s_map
-{
-	char	**map;
-	char	*map_memory;
-	int		width;
-	int		hight;
-	char	*no_file;;
-	char	*so_file;;
-	char	*we_file;;
-	char	*ea_file;;
-	int		floor_color;
-	int		cieling_color;
-	int		player[3];
-}				t_map;
-
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
 typedef struct s_mlxvars
 {
-	void	*mlx;
-	void	*win;
-	t_data	*img;
-	t_map	*map;
+	void		*mlx;
+	void		*win;
+	t_map		map;
+	t_data		main;
+	t_player	plr;
+	t_ray		ray;
+	t_texture	tex;
 }				t_mlxvars;
 
 /* map map_utils map_split*/
@@ -84,5 +57,25 @@ void	ft_get_map(t_map *map, char *filename);
 /* check_player map */
 void	ft_checkmap(t_map *map);
 void	ft_findplayer(t_map *map);
+
+/* dda */
+void	ft_perform_dda(t_player *plr, t_ray *ray, t_map *map);
+void	ft_set_dda(int x, t_player *plr, t_ray *ray);
+
+/* draw wall line */
+void	ft_draw_wall_line(int x, t_mlxvars *meta, t_ray *ray, t_texture *tex);
+void	ft_calc_wall_ray(t_player *plr, t_ray *ray, t_texture *tex);
+
+/* engine utils */
+long long	get_time(void);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int			get_tex_color(t_texture *tex, int tex_num);
+
+/* key hooks */
+int	ft_terminate(t_mlxvars *meta);
+void	ft_destroy(t_mlxvars *meta);
+int	key_hooks(int keycode, t_mlxvars *meta);
+
+int big_draw(void * a);
 
 #endif

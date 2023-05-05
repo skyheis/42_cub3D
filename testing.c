@@ -6,7 +6,7 @@
 /*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:56:21 by gfantech          #+#    #+#             */
-/*   Updated: 2023/05/05 18:08:42 by gfantech         ###   ########.fr       */
+/*   Updated: 2023/05/05 21:21:01 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,24 @@ long long	get_time(void)
 
 void init_player(t_player *p)
 {
-	p->posX = 22.0;
-	p->posY = 11.5;  //x and y start position
+	p->posX = 22.0; //prendere da map->player[0]
+	p->posY = 11.5; //prendere da map->player[1]
+	//convertire da N E S W a numero settare dirX e dirY
 	p->dirX = -1.0;
 	p->dirY = 0.0; //initial direction vector
+
 	p->planeX = 0.0;
 	p->planeY = 0.66;
-	p->moveSpeed = 1; //the constant value is in squares/second
-	p->rotSpeed = 0.1; //the constant value is in radians/second
+
+	/* questi li prende nel loop
+	 * p->moveSpeed = 1; //the constant value is in squares/second
+	 * p->rotSpeed = 0.1; //the constant value is in radians/second
+	*/
 }
 
-void init_texture(t_texture *t, t_vars vars)
+void init_texture(t_texture *t, t_vars vars) //questo sara' per le 4 immagini e basta
 {
-	t->imgs = malloc(sizeof(t_data) * 8);
+	t->imgs = malloc(sizeof(t_data) * 4);
 	t->imgs[0].img = mlx_xpm_file_to_image(vars.mlx, "pics/eagle.xpm", &t->texWidth, &t->texHeight);
 	t->imgs[0].addr = mlx_get_data_addr(t->imgs[0].img, &t->imgs[0].bits_per_pixel, &t->imgs[0].line_length, &t->imgs[0].endian);
 	t->imgs[1].img = mlx_xpm_file_to_image(vars.mlx, "pics/redbrick.xpm", &t->texWidth, &t->texHeight);
@@ -70,14 +75,6 @@ void init_texture(t_texture *t, t_vars vars)
 	t->imgs[2].addr = mlx_get_data_addr(t->imgs[2].img, &t->imgs[2].bits_per_pixel, &t->imgs[2].line_length, &t->imgs[2].endian);
 	t->imgs[3].img = mlx_xpm_file_to_image(vars.mlx, "pics/greystone.xpm", &t->texWidth, &t->texHeight);
 	t->imgs[3].addr = mlx_get_data_addr(t->imgs[3].img, &t->imgs[3].bits_per_pixel, &t->imgs[3].line_length, &t->imgs[3].endian);
-	t->imgs[4].img = mlx_xpm_file_to_image(vars.mlx, "pics/bluestone.xpm", &t->texWidth, &t->texHeight);
-	t->imgs[4].addr = mlx_get_data_addr(t->imgs[4].img, &t->imgs[4].bits_per_pixel, &t->imgs[4].line_length, &t->imgs[4].endian);
-	t->imgs[5].img = mlx_xpm_file_to_image(vars.mlx, "pics/mossy.xpm", &t->texWidth, &t->texHeight);
-	t->imgs[5].addr = mlx_get_data_addr(t->imgs[5].img, &t->imgs[5].bits_per_pixel, &t->imgs[5].line_length, &t->imgs[5].endian);
-	t->imgs[6].img = mlx_xpm_file_to_image(vars.mlx, "pics/wood.xpm", &t->texWidth, &t->texHeight);
-	t->imgs[6].addr = mlx_get_data_addr(t->imgs[6].img, &t->imgs[6].bits_per_pixel, &t->imgs[6].line_length, &t->imgs[6].endian);
-	t->imgs[7].img = mlx_xpm_file_to_image(vars.mlx, "pics/colorstone.xpm", &t->texWidth, &t->texHeight);
-	t->imgs[7].addr = mlx_get_data_addr(t->imgs[7].img, &t->imgs[7].bits_per_pixel, &t->imgs[7].line_length, &t->imgs[7].endian);
 }
 
 
@@ -103,8 +100,8 @@ int big_draw(void * a)
 	{
 		//calculate ray position and direction
 		all->plr->cameraX = 2 * x / (double)screenWidth - 1; //x-coordinate in camera space
-		all->plr->rayDirX = all->plr->dirX + all->plr->planeX*all->plr->cameraX;
-		all->plr->rayDirY = all->plr->dirY + all->plr->planeY*all->plr->cameraX;
+		all->plr->rayDirX = all->plr->dirX + all->plr->planeX * all->plr->cameraX;
+		all->plr->rayDirY = all->plr->dirY + all->plr->planeY * all->plr->cameraX;
 		//which box of the map we're in
 		all->plr->mapX = (int)all->plr->posX;
 		all->plr->mapY = (int)all->plr->posY;
@@ -141,16 +138,16 @@ int big_draw(void * a)
 			{
 				all->plr->sideDistX += all->plr->deltaDistX;
 				all->plr->mapX += all->plr->stepX;
-				all->plr->side = 0;
+				all->plr->side = 0; //muro x
 			}
 			else
 			{
 				all->plr->sideDistY += all->plr->deltaDistY;
 				all->plr->mapY += all->plr->stepY;
-				all->plr->side = 1;
+				all->plr->side = 1; //muro y
 			}
 			//Check if ray has hit a wall
-			if(worldMap[all->plr->mapX][all->plr->mapY] > 0)
+			if(worldMap[all->plr->mapX][all->plr->mapY] > 0) //is 1
 				all->plr->hit = 1;
 		}
 		//Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
@@ -160,7 +157,7 @@ int big_draw(void * a)
 			all->plr->perpWallDist = (all->plr->sideDistY - all->plr->deltaDistY);
 		//Calculate height of line to draw on screen
 		all->tex->lineHeight = (int)(screenHeight / all->plr->perpWallDist);
-		all->tex->pitch = 100;
+		all->tex->pitch = 100; //provo a cambiarlo e vedo cosa cambia lol
 		//calculate lowest and highest pixel to fill in current stripe
 		all->tex->drawStart = -all->tex->lineHeight / 2 + screenHeight / 2 + all->tex->pitch;
 		if(all->tex->drawStart < 0)
@@ -176,12 +173,16 @@ int big_draw(void * a)
 		all->tex->wallX -= floor((all->tex->wallX));
 		//x coordinate on the texture
 		all->tex->texX = (int)(all->tex->wallX * (double)all->tex->texWidth);
-		if(all->plr->side == 0 && all->plr->rayDirX > 0) all->tex->texX = all->tex->texWidth - all->tex->texX - 1;
-		if(all->plr->side == 1 && all->plr->rayDirY < 0) all->tex->texX = all->tex->texWidth - all->tex->texX - 1;
+		if(all->plr->side == 0 && all->plr->rayDirX > 0)
+			all->tex->texX = all->tex->texWidth - all->tex->texX - 1; //ma sono ugauli
+		if(all->plr->side == 1 && all->plr->rayDirY < 0)
+			all->tex->texX = all->tex->texWidth - all->tex->texX - 1;
 		// How much to increase the texture coordinate per screen pixel
 		all->tex->step = 1.0 * all->tex->texHeight / all->tex->lineHeight;
 		// Starting texture coordinate
 		all->tex->texPos = (all->tex->drawStart - all->tex->pitch - screenHeight / 2 + all->tex->lineHeight / 2) * all->tex->step;
+
+		//piu che texNum e' side N E S W
 		int texNum = worldMap[all->plr->mapX][all->plr->mapY] - 1;
 		for(int y = all->tex->drawStart; y < all->tex->drawEnd; y++)
 		{
@@ -203,6 +204,7 @@ int big_draw(void * a)
 	all->plr->moveSpeed = frameTime * 10.0; //the constant value is in squares/second
 	all->plr->rotSpeed = frameTime * 6.0; //the constant value is in radians/second
 	mlx_put_image_to_window(all->vars.mlx, all->vars.mlx_win, all->data.img, 0,0);
+	//print to text qua per gli fps
 	return (0);
 }
 
@@ -210,20 +212,16 @@ int	main(void)
 {
 	t_vars	vars;
 	t_data	img;
-	t_color	rgb;
 	t_everything	all;
 	t_player player;
 	t_texture tex;
 
-	rgb.red = 255;
-	rgb.blue = 0;
-	rgb.green = 0;
 	vars.mlx = mlx_init();
 	vars.mlx_win = mlx_new_window(vars.mlx, screenWidth, screenHeight, "Hello world!");
+	//potremmo settarla a NULL e fare il destroy solo se not NULL
 	img.img = mlx_new_image(vars.mlx, screenWidth, screenHeight);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	all.data = img;
-	all.color = rgb;
 	all.vars = vars;
 	all.plr = &player;
 	all.tex = &tex;

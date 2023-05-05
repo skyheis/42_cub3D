@@ -6,7 +6,7 @@
 #    By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 17:49:20 by ggiannit          #+#    #+#              #
-#    Updated: 2023/05/03 11:01:13 by ggiannit         ###   ########.fr        #
+#    Updated: 2023/05/05 23:38:38 by ggiannit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ MLX_PATH = ../minilibx-linux
 DIRSRCS =
 DIROBJS = obj/
 
-FLSRCS =
+FLSRCS = main.c dda.c engine.c engine_utils.c key_hooks.c wall_line.c \
+		 map.c check_map.c check_player.c map_split.c map_utils.c
 
 FLOBJS = ${FLSRCS:.c=.o}
 
@@ -39,7 +40,7 @@ CC = clang
 AR = ar
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -g
-MLXFLAGS = -lm -lX11 -lXext -lmlx
+MLXFLAGS = -lm -lX11 -lXext #-lmlx
 
 ######## EXT #########
 

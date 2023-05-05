@@ -1,23 +1,16 @@
+NO ./pics/greystone.xpm
+SO ./pics/greystone.xpm
+WE ./pics/greystone.xpm
+EA ./pics/greystone.xpm
 
-F     255,255,255    
+C 255,255,255
+F 255,255,255
 
-EA ./path_to_the_east_texture        
-NO ./path_to_the_north_texture 
-WE ./path_to_the_west_texture  
-
-
-SO       ./path_to_the_south_texture        
-
-C 255,255,255    
-
-       111
-       101
-       101
-  111111011111
-  1000000100S1
-  100000011111
-  100000000001
-   11110000001
-    1110000001
-   10000000001
-    111111111
+111111111111
+100000010001
+100000011111
+100000000001
+111000000001
+1110000N0001
+100000000001
+111111111111

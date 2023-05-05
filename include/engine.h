@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/05 18:08:12 by gfantech          #+#    #+#             */
-/*   Updated: 2023/05/05 20:20:56 by ggiannit         ###   ########.fr       */
+/*   Created: 2023/05/05 21:18:52 by ggiannit          #+#    #+#             */
+/*   Updated: 2023/05/05 21:47:20 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
 
-#include "mlx.h"
-#include <mlx.h>
-#include "libft.h"
-#include <math.h>
-#include <sys/time.h>
-#include <stdbool.h>
+#ifndef ENGINE_H
+# define ENGINE_H
 
-#define screenWidth 1080
-#define screenHeight 720
-#define UP 65362
-#define LEFT 65361
-#define RIGHT 65363
-#define DOWN 65364 
-#define W 119
-#define S 115
-#define D 100
-#define A 97
-#define ESC 65307
-
-typedef struct	s_data {
+typedef struct	s_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -40,19 +23,21 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-
-typedef struct	s_vars {
-	void	*mlx;
-	void	*mlx_win;
-}				t_vars;
-
-typedef struct s_player {
+typedef struct	s_player
+{
 	/*PLAYER DATA*/
-	double posX, posY;
-	double dirX, dirY;
-	double planeX, planeY; 
-	double moveSpeed;
-	double rotSpeed;
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+	double	moveSpeed;
+	double	rotSpeed;
+}				t_player;
+
+typedef struct	s_ray
+{
 	/*RAY DATA*/
 	//calculate ray position and direction
 	double cameraX;//x-coordinate in camera space
@@ -75,10 +60,9 @@ typedef struct s_player {
 	int side; //was a NS or a EW wall hit?
 	double time; //time of current frame
 	double oldTime; //time of previous frame
-}	t_player;
+}				t_ray;
 
-
-typedef struct s_texture
+typedef struct	s_texture
 {
 	t_data *imgs;
 	int	texWidth;
@@ -97,34 +81,21 @@ typedef struct s_texture
 	double step;
 	// Starting texture coordinate
 	double texPos;
-}	t_texture;
+}				t_texture;
 
-
-
-
-typedef struct	s_everything {
-	t_data	data;
-	t_vars	vars;
-	t_player *plr;
-	t_texture *tex;
-}				t_everything;
-
-
-/****************/
-/*    UTILS     */
-/****************/
-
-int	create_trgb(int t, int r, int g, int b);
-void	destroy(t_vars *vars);
-int	terminate(t_vars *vars);
-int	key_hooks(int keycode, t_everything *all);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-
-int big_draw(void * a);
-
-#define mapWidth 24
-#define mapHeight 24
-
-extern int worldMap[mapWidth][mapHeight];
+typedef struct	s_map
+{
+	char	**map;
+	char	*map_memory;
+	int		width;
+	int		hight;
+	char	*no_file;;
+	char	*so_file;;
+	char	*we_file;;
+	char	*ea_file;;
+	int		floor_color;
+	int		cieling_color;
+	int		player[3];
+}				t_map;
 
 #endif
