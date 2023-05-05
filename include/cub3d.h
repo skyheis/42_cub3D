@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 10:56:02 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/04 19:03:00 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:33:53 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void	ft_get_fc_color(char *mapmem, int *i, int *color);
 void	ft_wallimage_path(char *mapmem, int *i, char **wallpath);
 void	ft_get_map(t_map *map, char *filename);
 
-/* check_player */
+/* check_player map */
+void	ft_checkmap(t_map *map);
 void	ft_findplayer(t_map *map);
 
 #endif

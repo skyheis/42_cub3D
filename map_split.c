@@ -6,11 +6,27 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:58:03 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/04 16:58:55 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:57:00 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	ft_replace_bn(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '\n')
+		{
+			str[i] = 32;
+			return ;
+		}
+		i++;
+	}
+}
 
 static int	ft_longestline(char *str)
 {
@@ -65,6 +81,7 @@ char	**ft_splitmap(t_map *map, char *onlymap)
 	{
 		split[y] = (char *) ft_calloc(map->width + 1, sizeof(char));
 		ft_strlcpy(split[y], &onlymap[i], ft_findchar(&onlymap[i], '\n') + 2);
+		ft_replace_bn(split[y]);
 		while (onlymap[i] && onlymap[i] != '\n')
 			i++;
 		if (onlymap[i] == '\n')
