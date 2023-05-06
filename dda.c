@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 22:48:28 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/06 18:15:21 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:15:56 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,21 @@ void	ft_perform_dda(t_player *plr, t_ray *ray, t_map *map)
 			ray->sideDistX += ray->deltaDistX;
 			ray->mapX += ray->stepX;
 			ray->side = 0; //muro x
+			if (ray->rayDirX < 0)// && !ray->rayDirY
+				ray->dio = 0; //muro x
+			else
+				ray->dio = 1; //muro x
 		}
 		else
 		{
 			ray->sideDistY += ray->deltaDistY;
 			ray->mapY += ray->stepY;
 			ray->side = 1; //muro x
+			if (ray->rayDirY < 0)// && !ray->rayDirY
+				ray->dio = 2; //muro x
+			else
+				ray->dio = 3; //muro x
 		}
-		if (ray->rayDirX < 0)// && !ray->rayDirY
-			ray->dio = 0; //muro x
-		else
-			ray->dio = 1; //muro x
-		if (ray->rayDirY < 0)// && !ray->rayDirY
-			ray->dio = 2; //muro x
-		else
-			ray->dio = 3;
 		//Check if ray has hit a wall
 		if(map->map[ray->mapX][ray->mapY] == '1') //is 1
 			ray->hit = 1;
