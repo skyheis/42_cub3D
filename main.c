@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:22:41 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/05 23:36:39 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/06 16:00:11 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,31 @@
 
 void init_player(t_player *plr, t_map map)
 {
-	plr->posX = (double) map.player[X];// + 0.5;
+	plr->posX = (double) map.player[X] + 0.5;
 	plr->posY = (double) map.player[Y] + 0.5;
-	//p->posX = 22.0; //prendere da map->player[0]
-	//p->posY = 11.5; //prendere da map->player[1]
-
-	//convertire da N E S W a numero settare dirX e dirY
-	plr->dirX = -1.0;
-	plr->dirY = 0.0; //initial direction vector
-
-	plr->planeX = 0.0;
-	plr->planeY = 0.66;
+	if (map.player[Z] == 'N' || map.player[Z] == 'S')
+	{
+		plr->dirX = 1.0;
+		plr->dirY = 0.0; //initial direction vector
+		plr->planeX = 0.0;
+		plr->planeY = 0.66;
+		if (map.player[Z] == 'N')
+			plr->dirX *= -1;
+		else
+			plr->planeY *= -1;
+	}
+	else
+	{
+		plr->dirX = 0.001;
+		plr->dirY = 1.0; //initial direction vector
+		plr->planeX = 0.66;
+		plr->planeY = 0.0;
+		if (map.player[Z] == 'W')
+		{
+			plr->dirY *= -1;
+			plr->planeX *= -1;
+		}
+	}
 }
 
 void init_texture(t_texture *t, t_mlxvars meta, t_map map) //ancora da indirizzare le 4 immagini

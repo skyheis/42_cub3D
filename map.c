@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:24:49 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/05 23:37:46 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/06 16:43:54 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ void	ft_get_map(t_map *map, char *filename)
 	printf("ok player\n");
 	ft_checkmap(map);
 	printf("ok map\n");
+	//ft_printmatrix(map->map);
+	printf("player:\nx %i\ny %i\nv %c\n", map->player[0], map->player[1], (char) map->player[2]);
 }
 
 void	ft_printmatrix(char **mat)

@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 22:48:28 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/05 23:36:56 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/06 17:51:23 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,20 @@ void	ft_perform_dda(t_player *plr, t_ray *ray, t_map *map)
 			ray->sideDistX += ray->deltaDistX;
 			ray->mapX += ray->stepX;
 			ray->side = 0; //muro x
+			if (ray->rayDirX < 0)// && !ray->rayDirY
+				ray->dio = 0; //muro x
+			else
+				ray->dio = 1; //muro x
 		}
 		else
 		{
 			ray->sideDistY += ray->deltaDistY;
 			ray->mapY += ray->stepY;
-			ray->side = 1; //muro y
+			ray->side = 1; //muro x
+			if (ray->rayDirY < 0)// && !ray->rayDirY
+				ray->dio = 2; //muro x
+			else
+				ray->dio = 3; //muro x
 		}
 		//Check if ray has hit a wall
 		if(map->map[ray->mapX][ray->mapY] == '1') //is 1
@@ -66,9 +74,13 @@ static void	ft_calc_step_side_dist(t_player *plr, t_ray *ray)
 void	ft_set_dda(int x, t_player *plr, t_ray *ray)
 {
 	//calculate ray position and direction
+	//ray->cameraX = 2 * x / (double)WIN_WIDTH - 1; //x-coordinate in camera space
 	ray->cameraX = 2 * x / (double)WIN_WIDTH - 1; //x-coordinate in camera space
 	ray->rayDirX = plr->dirX + plr->planeX * ray->cameraX;
 	ray->rayDirY = plr->dirY + plr->planeY * ray->cameraX;
+	//printf("rayDirX %f\nrayDirY %f\n", ray->rayDirX, ray->rayDirY);
+	//printf("plrDirX %f\nplrDirY %f\n", plr->dirX, plr->dirY);
+	//printf("planeX %f\nplaneY %f\n\n", plr->planeX, plr->planeY);
 	//which box of the map we're in
 	ray->mapX = (int)plr->posX;
 	ray->mapY = (int)plr->posY;

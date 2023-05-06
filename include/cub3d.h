@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 10:56:02 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/05 23:33:37 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/06 17:53:13 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@
 # include "keynum.h"
 # include "engine.h"
 # include <math.h>
-# include <mlx.h> //????
 # include <sys/time.h>
 # include <stdbool.h>
 
-# define WIN_WIDTH 1080 //1920
-# define WIN_HEIGHT 720 //995
+# define WIN_WIDTH  1920// 1080 //1920
+# define WIN_HEIGHT 995//720  //995
 
 # define READ_SIZE	100000
 
@@ -65,6 +64,7 @@ void	ft_set_dda(int x, t_player *plr, t_ray *ray);
 /* draw wall line */
 void	ft_draw_wall_line(int x, t_mlxvars *meta, t_ray *ray, t_texture *tex);
 void	ft_calc_wall_ray(t_player *plr, t_ray *ray, t_texture *tex);
+void	ft_draw_cieiling_floor(t_mlxvars *meta, t_map map);
 
 /* engine utils */
 long long	get_time(void);
@@ -76,6 +76,6 @@ int	ft_terminate(t_mlxvars *meta);
 void	ft_destroy(t_mlxvars *meta);
 int	key_hooks(int keycode, t_mlxvars *meta);
 
-int big_draw(void * a);
+int big_draw(void * voidmeta);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:18:52 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/05 21:47:20 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/06 17:41:55 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct	s_ray
 	int stepY;
 	int hit; //was there a wall hit?
 	int side; //was a NS or a EW wall hit?
+	int dio;
 	double time; //time of current frame
 	double oldTime; //time of previous frame
 }				t_ray;

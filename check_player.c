@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 19:01:18 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/04 19:01:57 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/06 13:47:53 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	ft_findplayer(t_map *map)
 			if (ft_isplayer(map->map[y][x]))
 			{
 				ft_errorplayer(map, 1);
-				map->player[0] = x;
-				map->player[1] = y;
+				map->player[0] = y;
+				map->player[1] = x;
 				map->player[2] = map->map[y][x];
 			}
 			x++;
