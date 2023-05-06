@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:53:59 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/06 17:32:06 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:17:56 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int big_draw(void *voidmeta)
 	while (x < WIN_WIDTH)
 	{
 		ft_set_dda(x, &meta->plr, &meta->ray);
-		ft_perform_dda(&meta->plr, &meta->ray, &meta->map);
+		ft_perform_dda(&meta->ray, &meta->map);
 
 		ft_calc_wall_ray(&meta->plr, &meta->ray, &meta->tex);
 		ft_draw_wall_line(x, meta, &meta->ray, &meta->tex);

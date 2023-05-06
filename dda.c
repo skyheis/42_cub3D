@@ -6,17 +6,14 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 22:48:28 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/06 18:15:56 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:17:35 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_perform_dda(t_player *plr, t_ray *ray, t_map *map)
+void	ft_perform_dda(t_ray *ray, t_map *map)
 {
-	//perform DDA
-	(void) plr;
-	ray->hit = 0; //was there a wall hit?
 	while (ray->hit == 0)
 	{
 		//jump to next map square, either in x-direction, or in y-direction
@@ -94,4 +91,5 @@ void	ft_set_dda(int x, t_player *plr, t_ray *ray)
 	else
 		ray->deltaDistY = fabs(1 / ray->rayDirY);
 	ft_calc_step_side_dist(plr, ray);
+	ray->hit = 0; //was there a wall hit?
 }

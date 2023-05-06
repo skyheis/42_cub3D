@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 10:56:02 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/06 17:53:13 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:17:45 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_checkmap(t_map *map);
 void	ft_findplayer(t_map *map);
 
 /* dda */
-void	ft_perform_dda(t_player *plr, t_ray *ray, t_map *map);
+void	ft_perform_dda(t_ray *ray, t_map *map);
 void	ft_set_dda(int x, t_player *plr, t_ray *ray);
 
 /* draw wall line */
