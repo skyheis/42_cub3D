@@ -23,10 +23,7 @@ static void	ft_iswallornot(t_map *map, char c)
 {
 	(void) map;
 	if (c != '1' && c != 32)
-	{
-		printf("exit c is '%c'\n", c);
-		exit(6); //ft_exit
-	}
+		ft_exit_map(map, "Error: map is not closed or contains wrong char\n");
 }
 
 void	ft_fillflood(t_map *map, int x, int y)
@@ -35,13 +32,12 @@ void	ft_fillflood(t_map *map, int x, int y)
 		ft_iswallornot(map, map->map[y][x]);
 	if (x < 0 || x >= map->width || y < 0 || y >= map->hight)
 		return ;
-	
 	if (map->map[y][x] == '.' || map->map[y][x] == '1')
 		return ;
 	else if (ft_isvalidmap(map->map[y][x]))
 		map->map[y][x] = '.';
 	else
-		exit(7); //error map
+		ft_exit_map(map, "Error: map is not closed or contains wrong char\n");
 	ft_fillflood(map, x + 1, y);
 	ft_fillflood(map, x, y + 1);
 	ft_fillflood(map, x - 1, y);
@@ -61,7 +57,6 @@ void	ft_checkmap(t_map *map)
 	x = 0;
 	while (map->map[y][x])
 		ft_iswallornot(map, map->map[y][x++]);
-	printf("ok wall top down\n");
 	y = 1;
 	while (y < map->hight - 1)
 	{

@@ -24,17 +24,9 @@ static void	ft_errorplayer(t_map *map, int z)
 	static int	flag = 0;
 
 	if (!flag && z == 1)
-	{
 		flag = 1;
-	}
 	else if ((!flag && z == 0) || (flag && z == 1))
-	{
-		ft_putstr_fd("The player must be one!\n", 2);
-		map->player[0] = -1;
-		map->player[1] = -1;
-		map->player[2] = -1;
-		exit(1); //fare free ecc
-	}
+		ft_exit_map(map, "The player must be one!\n");
 }
 
 void	ft_findplayer(t_map *map)

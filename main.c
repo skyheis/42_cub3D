@@ -44,7 +44,6 @@ void init_player(t_player *plr, t_map map)
 void init_texture(t_texture *t, t_mlxvars meta, t_map map) //ancora da indirizzare le 4 immagini
 {
 	//check dei file?
-	t->imgs = malloc(sizeof(t_data) * 4);
 	t->imgs[0].img = mlx_xpm_file_to_image(meta.mlx, map.no_file, &t->texWidth, &t->texHeight);
 	t->imgs[0].addr = mlx_get_data_addr(t->imgs[0].img, &t->imgs[0].bits_per_pixel, &t->imgs[0].line_length, &t->imgs[0].endian);
 	t->imgs[1].img = mlx_xpm_file_to_image(meta.mlx, map.so_file, &t->texWidth, &t->texHeight);
@@ -62,6 +61,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (1);
 	ft_get_map(&meta.map, av[1]);
+//	ft_terminate(&meta);
 	meta.mlx = mlx_init();
 	meta.win = mlx_new_window(meta.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	//potremmo settarla a NULL e fare il destroy solo se not NULL

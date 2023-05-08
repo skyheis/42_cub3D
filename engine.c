@@ -46,8 +46,12 @@ int big_draw(void *voidmeta)
 	meta->ray.time = get_time();
 	frameTime = (meta->ray.time - meta->ray.oldTime) / 1000.0; //frametime is the time this frame has taken, in seconds
 	//speed modifiers
-	meta->plr.moveSpeed = frameTime * 10.0; //the constant value is in squares/second
-	meta->plr.rotSpeed = frameTime * 8.0; //the constant value is in radians/second
+//	printf("frameTime: %f\n", frameTime);
+	//meta->plr.moveSpeed = frameTime * 10.0; //the constant value is in squares/second
+	//meta->plr.rotSpeed = frameTime * 8.0; //the constant value is in radians/second
+	(void) frameTime;
+	meta->plr.moveSpeed = 0.1; //the constant value is in squares/second
+	meta->plr.rotSpeed = 0.09; //the constant value is in radians/second
 	mlx_put_image_to_window(meta->mlx, meta->win, meta->main.img, 0,0);
 	//print to text qua per gli fps
 	return (0);

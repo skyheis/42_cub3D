@@ -65,7 +65,7 @@ typedef struct	s_ray
 
 typedef struct	s_texture
 {
-	t_data *imgs;
+	t_data imgs[4];
 	int	texWidth;
 	int texHeight;
 	int lineHeight;

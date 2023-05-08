@@ -20,10 +20,16 @@ void	ft_check_infile(char *infile)
 	len = ft_strlen(infile);
 	fd = open(infile, O_RDONLY);
 	if (fd == -1 || len < 5)
-		exit(1); //ft_exit();
+	{
+		ft_putstr_fd("Invalid file name\n", 2);
+		exit(1);
+	}
 	close(fd);
 	if (ft_strncmp(&infile[len - 4], ".cub", 5) || infile[len - 5] == '/')
+	{
+		ft_putstr_fd("Invalid file extention\n", 2);
 		exit(1);
+	}
 }
 
 void	ft_read_map(t_map *map, char *file)
@@ -39,7 +45,10 @@ void	ft_read_map(t_map *map, char *file)
 		file_memory = ft_calloc(READ_SIZE + 1, sizeof(char));
 		b_readed = read(fd, file_memory, READ_SIZE);
 		if (b_readed == -1)
-			exit(1); //ft_exit_map();
+		{
+			ft_free_null(&file_memory);
+			ft_exit_map(map, "Internal error while reading map\n");
+		}
 		map->map_memory = ft_strjoin_free(map->map_memory, file_memory);
 	}
 	close(fd);
@@ -55,22 +64,23 @@ int	ft_set_config(t_map *map)
 		while (map->map_memory[i] == '\n')
 			i++;
 		if (!ft_strncmp(&map->map_memory[i], "NO ", 3))
-			ft_wallimage_path(map->map_memory, &i, &map->no_file);
+			ft_wallimage_path(map, map->map_memory, &i, &map->no_file);
 		else if (!ft_strncmp(&map->map_memory[i], "SO ", 3))
-			ft_wallimage_path(map->map_memory, &i, &map->so_file);
+			ft_wallimage_path(map, map->map_memory, &i, &map->so_file);
 		else if (!ft_strncmp(&map->map_memory[i], "WE ", 3))
-			ft_wallimage_path(map->map_memory, &i, &map->we_file);
+			ft_wallimage_path(map, map->map_memory, &i, &map->we_file);
 		else if (!ft_strncmp(&map->map_memory[i], "EA ", 3))
-			ft_wallimage_path(map->map_memory, &i, &map->ea_file);
+			ft_wallimage_path(map, map->map_memory, &i, &map->ea_file);
 		else if (!ft_strncmp(&map->map_memory[i], "F ", 2))
-			ft_get_fc_color(map->map_memory, &i, &map->floor_color);
+			ft_get_fc_color(map, map->map_memory, &i, &map->floor_color);
 		else if (!ft_strncmp(&map->map_memory[i], "C ", 2))
-			ft_get_fc_color(map->map_memory, &i, &map->cieling_color);
+			ft_get_fc_color(map, map->map_memory, &i, &map->cieling_color);
 		else
 			break ;
 	}
 	if (!ft_isallset(map))
-		exit(1); //ft_exit_map
+		ft_exit_map(map, "Error while reading map: \
+			duplicate, missing or wrong paramiters");
 	return (i);
 }
 

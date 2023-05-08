@@ -21,8 +21,10 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-# define WIN_WIDTH  1920// 1080 //1920
-# define WIN_HEIGHT 995//720  //995
+//# define WIN_WIDTH  1920
+//# define WIN_HEIGHT 995
+# define WIN_WIDTH  1080
+# define WIN_HEIGHT 720
 
 # define READ_SIZE	100000
 
@@ -49,8 +51,8 @@ typedef struct s_mlxvars
 char	**ft_splitmap(t_map *map, char *onlymap);
 int		ft_substrlen(char *str);
 int		ft_isallset(t_map *map);
-void	ft_get_fc_color(char *mapmem, int *i, int *color);
-void	ft_wallimage_path(char *mapmem, int *i, char **wallpath);
+void	ft_get_fc_color(t_map *map, char *mapmem, int *i, int *color);
+void	ft_wallimage_path(t_map *map, char *mapmem, int *i, char **wallpath);
 void	ft_get_map(t_map *map, char *filename);
 
 /* check_player map */
@@ -77,5 +79,8 @@ void	ft_destroy(t_mlxvars *meta);
 int	key_hooks(int keycode, t_mlxvars *meta);
 
 int big_draw(void * voidmeta);
+
+/* handle error */
+void	ft_exit_map(t_map *map, char *str);
 
 #endif

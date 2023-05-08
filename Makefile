@@ -18,13 +18,13 @@ BNUS = bonus
 ###### VARIABLE ######
 
 INCLUDE = include
-MLX_PATH = ../minilibx-linux
+MLX_PATH = minilibx
 
 DIRSRCS =
 DIROBJS = obj/
 
 FLSRCS = main.c dda.c engine.c engine_utils.c key_hooks.c wall_line.c \
-		 map.c check_map.c check_player.c map_split.c map_utils.c
+		 map.c check_map.c check_player.c map_split.c map_utils.c handle_error.c
 
 FLOBJS = ${FLSRCS:.c=.o}
 
@@ -35,8 +35,8 @@ ARUSDDIR = archive/
 
 ARINC = $(addprefix $(ARUSDDIR),$(ARUSD))
 
-#CC = gcc
-CC = clang
+CC = gcc
+#CC = clang
 AR = ar
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -g
@@ -57,7 +57,7 @@ $(DIROBJS)%.o: $(DIRSRCS)%.c
 
 ####### RULES ########
 
-all: libft ${NAME}
+all: minilibx libft ${NAME}
 
 ${NAME}: ${OBJS}
 	@echo "$(YELLOW)- Program Name: $(WHITE)${NAME}$(DEF_COLOR)"
@@ -66,12 +66,13 @@ ${NAME}: ${OBJS}
 	@${CC} ${CFLAGS} -L $(ARUSDDIR) -I $(INCLUDE) -o $(NAME) $(OBJS) $(ARINC) $(MLXFLAGS) 
 
 clean:
+	@make -sC minilibx clean
 	@make -sC libft clean
 	@${RM} ${OBJS} 
 	@echo "$(RED)All $(CYAN)$(NAME)$(RED)'s objects removed with $(WHITE)${RM}$(DEF_COLOR) 🧹" 
 
 fclean: clean
-	@${RM} ${PRNAME} archive/libft.a
+	@${RM} ${PRNAME} archive/libft.a archive/libmlx.a
 	@echo "$(RED)..and $(CYAN)${NAME} $(RED)as been removed$(DEF_COLOR) 🚮"
 
 libft:
@@ -86,7 +87,7 @@ libftfclean:
 re: fclean all
 
 minilibx:
-	@make -C $(MLX_PATH)
+	@make -sC $(MLX_PATH)
 	@cp $(MLX_PATH)/mlx.h $(INCLUDE)/mlx.h
 	@cp $(MLX_PATH)/libmlx_Linux.a $(ARUSDDIR)/libmlx.a
 
