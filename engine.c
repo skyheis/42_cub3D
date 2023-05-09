@@ -6,7 +6,7 @@
 /*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:53:59 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/09 14:48:40 by gfantech         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:43:13 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int big_draw(void *voidmeta)
 	double		frameTime;
 
 	x = 0;
-	mapf = -1;
+	minizoom = -1;
 	meta = (t_mlxvars *)voidmeta;
 	ft_reset_main_img(&meta->main, *meta);
 	ft_draw_cieiling_floor(meta, meta->map);
@@ -58,7 +58,7 @@ int big_draw(void *voidmeta)
 	meta->plr.rotSpeed = 0.09; //the constant value is in radians/second
 	mlx_put_image_to_window(meta->mlx, meta->win, meta->main.img, 0,0);
 	if (minizoom >= 10)
-		mlx_put_image_to_window(meta->mlx, meta->win, meta->tex.plricon[meta->tex.mapf].img, 42 + (int) (meta->plr.posY * zoom), 42 + (int) (meta->plr.posX * zoom));
+		mlx_put_image_to_window(meta->mlx, meta->win, meta->tex.plricon[meta->tex.mapf].img, 42 + (int) (meta->plr.posY * minizoom), 42 + (int) (meta->plr.posX * minizoom));
 	//print to text qua per gli fps
 	return (0);
 }
