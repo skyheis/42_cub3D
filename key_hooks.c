@@ -33,6 +33,7 @@ int	ft_terminate(t_mlxvars *meta)
 	exit(0);
 }
 
+/* remove */
 void	ft_destroy(t_mlxvars *meta)
 {
 	mlx_destroy_window(meta->mlx, meta->win);
@@ -111,6 +112,13 @@ int	key_hooks(int keycode, t_mlxvars *meta)
 	t_player	*plr;
 
 	plr = &meta->plr;
+	if (key_hooks == TAB_KEY)
+	{
+		if (meta->tex.minimap) 
+			meta->tex.minimap = 0;
+		else
+			meta->tex.minimap = 1;
+	}
 	if (keycode == B_ESC)
 		ft_terminate(meta);
 	ft_move_plr_fb(keycode, plr, meta);

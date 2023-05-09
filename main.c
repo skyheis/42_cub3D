@@ -44,6 +44,7 @@ void init_player(t_player *plr, t_map map)
 void init_texture(t_texture *t, t_mlxvars meta, t_map map) //ancora da indirizzare le 4 immagini
 {
 	//check dei file?
+	t->minimap = 0;
 	t->imgs[0].img = mlx_xpm_file_to_image(meta.mlx, map.no_file, &t->texWidth, &t->texHeight);
 	t->imgs[0].addr = mlx_get_data_addr(t->imgs[0].img, &t->imgs[0].bits_per_pixel, &t->imgs[0].line_length, &t->imgs[0].endian);
 	t->imgs[1].img = mlx_xpm_file_to_image(meta.mlx, map.so_file, &t->texWidth, &t->texHeight);
