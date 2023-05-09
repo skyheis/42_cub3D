@@ -6,7 +6,7 @@
 /*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:22:41 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/09 15:13:18 by gfantech         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:51:24 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ void init_player(t_player *plr, t_map map)
 void init_texture(t_texture *t, t_mlxvars meta, t_map map) //ancora da indirizzare le 4 immagini
 {
 	//check dei file?
+	t->plricon[0].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow8.xpm", &t->texWidth, &t->texHeight);
+	t->plricon[0].addr = mlx_get_data_addr(t->plricon[0].img, &t->plricon[0].bits_per_pixel, &t->plricon[0].line_length, &t->plricon[0].endian);
+	t->plricon[1].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow16.xpm", &t->texWidth, &t->texHeight);
+	t->plricon[1].addr = mlx_get_data_addr(t->plricon[1].img, &t->plricon[1].bits_per_pixel, &t->plricon[1].line_length, &t->plricon[1].endian);
+	t->plricon[2].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow32.xpm", &t->texWidth, &t->texHeight);
+	t->plricon[2].addr = mlx_get_data_addr(t->plricon[2].img, &t->plricon[2].bits_per_pixel, &t->plricon[2].line_length, &t->plricon[2].endian);
 	t->imgs[0].img = mlx_xpm_file_to_image(meta.mlx, map.no_file, &t->texWidth, &t->texHeight);
 	t->imgs[0].addr = mlx_get_data_addr(t->imgs[0].img, &t->imgs[0].bits_per_pixel, &t->imgs[0].line_length, &t->imgs[0].endian);
 	t->imgs[1].img = mlx_xpm_file_to_image(meta.mlx, map.so_file, &t->texWidth, &t->texHeight);
@@ -55,12 +61,6 @@ void init_texture(t_texture *t, t_mlxvars meta, t_map map) //ancora da indirizza
 	t->pitch = 0;
 	t->minimap = 0;
 	t->mapf = -1;
-	t->plricon[0].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow8.xpm", &t->texWidth, &t->texHeight);
-	t->plricon[0].addr = mlx_get_data_addr(t->plricon[0].img, &t->plricon[0].bits_per_pixel, &t->plricon[0].line_length, &t->plricon[0].endian);
-	t->plricon[1].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow16.xpm", &t->texWidth, &t->texHeight);
-	t->plricon[1].addr = mlx_get_data_addr(t->plricon[1].img, &t->plricon[1].bits_per_pixel, &t->plricon[1].line_length, &t->plricon[1].endian);
-	t->plricon[2].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow32.xpm", &t->texWidth, &t->texHeight);
-	t->plricon[2].addr = mlx_get_data_addr(t->plricon[2].img, &t->plricon[2].bits_per_pixel, &t->plricon[2].line_length, &t->plricon[2].endian);
 }
 
 int	mouse_win3(int x,int y, void *p)
