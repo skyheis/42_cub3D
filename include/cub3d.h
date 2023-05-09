@@ -83,4 +83,7 @@ int big_draw(void * voidmeta);
 /* handle error */
 void	ft_exit_map(t_map *map, char *str);
 
+/* minimap */
+void ft_draw_minimap(t_mlxvars *meta, t_map map);
+
 #endif

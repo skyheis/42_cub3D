@@ -24,7 +24,8 @@ DIRSRCS =
 DIROBJS = obj/
 
 FLSRCS = main.c dda.c engine.c engine_utils.c key_hooks.c wall_line.c \
-		 map.c check_map.c check_player.c map_split.c map_utils.c handle_error.c
+		 map.c check_map.c check_player.c map_split.c map_utils.c \
+		 handle_error.c minimap.c
 
 FLOBJS = ${FLSRCS:.c=.o}
 

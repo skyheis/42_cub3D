@@ -21,31 +21,6 @@ static void	ft_reset_main_img(t_data *main, t_mlxvars meta)
 			&main->line_length, &main->endian);
 }
 
-void ft_draw_minimap(t_mlxvars *meta, t_map map)
-{
-    int x;
-    int y;
-
-    x = 0;
-    while (x / 10 < map.hight)
-    {
-        y = 0;
-        while (y / 10 < map.width)
-        {
-            if (map.map[x / 10][y / 10] == '1')
-                my_mlx_pixel_put(&meta->main, 42 + y, 42 + x, 0xFF00FF);
-            else if (map.map[x / 10][y / 10] == '.')
-                my_mlx_pixel_put(&meta->main, 42 + y, 42 + x, 0x0);
-            y++;
-        }
-        x++;
-    }
-	my_mlx_pixel_put(&meta->main, 41 + (int) (meta->plr.posY * 10), 41 + (int) (meta->plr.posX * 10), 0x00FF00);
-	my_mlx_pixel_put(&meta->main, 42 + (int) (meta->plr.posY * 10), 41 + (int) (meta->plr.posX * 10), 0x00FF00);
-	my_mlx_pixel_put(&meta->main, 41 + (int) (meta->plr.posY * 10), 42 + (int) (meta->plr.posX * 10), 0x00FF00);
-	my_mlx_pixel_put(&meta->main, 42 + (int) (meta->plr.posY * 10), 42 + (int) (meta->plr.posX * 10), 0x00FF00);
-}
-
 int big_draw(void *voidmeta)
 {
 	int			x;
