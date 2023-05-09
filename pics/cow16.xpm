@@ -1,0 +1,31 @@
+/* XPM */
+static char *cow16[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 9 1 ",
+"  c #000000",
+". c #7D0E0E",
+"X c gray26",
+"o c gray38",
+"O c #B71C1C",
+"+ c #90A4AE",
+"@ c #B0BEC5",
+"# c #CFD8DC",
+"$ c white",
+/* pixels */
+"OOOOOO@@@@oooo..",
+"OOOOOO@@@@oooo..",
+"OOOOOO####@@..OO",
+"OOOOOO####@@..OO",
+"    OO@@@@OO    ",
+"    OO@@@@OO    ",
+"    OO++OOOO    ",
+"    OO++OOOO    ",
+"OOOOOOOOOOOOOOOO",
+"OOOOOOOOOOOOOOOO",
+"OO..$$$$$$$$..OO",
+"OO..$$$$$$$$..OO",
+"OO$$  oooo  $$..",
+"OO$$  oooo  $$..",
+"OO##ooXXXXoo$$OO",
+"OO##ooXXXXoo$$OO"
+};

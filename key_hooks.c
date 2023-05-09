@@ -18,12 +18,18 @@ int	ft_terminate(t_mlxvars *meta)
 		mlx_destroy_image(meta->mlx, meta->main.img);
 	if (meta->tex.imgs[0].img)
 		mlx_destroy_image(meta->mlx, meta->tex.imgs[0].img);
-	if (meta->tex.imgs[0].img)
+	if (meta->tex.imgs[1].img)
 		mlx_destroy_image(meta->mlx, meta->tex.imgs[1].img);
-	if (meta->tex.imgs[0].img)
+	if (meta->tex.imgs[2].img)
 		mlx_destroy_image(meta->mlx, meta->tex.imgs[2].img);
-	if (meta->tex.imgs[0].img)
+	if (meta->tex.imgs[3].img)
 		mlx_destroy_image(meta->mlx, meta->tex.imgs[3].img);
+	if (meta->tex.plricon[0].img)
+		mlx_destroy_image(meta->mlx, meta->tex.plricon[0].img);
+	if (meta->tex.plricon[1].img)
+		mlx_destroy_image(meta->mlx, meta->tex.plricon[1].img);
+	if (meta->tex.plricon[2].img)
+		mlx_destroy_image(meta->mlx, meta->tex.plricon[2].img);
 	if (meta->win)
 		mlx_destroy_window(meta->mlx, meta->win);
 	if (meta->mlx)

@@ -83,6 +83,8 @@ typedef struct	s_texture
 	// Starting texture coordinate
 	double texPos;
 	int	minimap;
+	t_data	plricon[3];
+	int mapf;
 }				t_texture;
 
 typedef struct	s_map
