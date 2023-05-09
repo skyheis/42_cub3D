@@ -106,13 +106,22 @@ void	ft_rotate_cam(int keycode, t_player *plr)
 	}
 }
 
+void ft_change_pitch(int keycode, t_texture *tex)
+{
+	if (keycode == UP)
+		tex->pitch += 30;
+	else if (keycode == DOWN)
+		tex->pitch -= 30;
+}
+
+
 
 int	key_hooks(int keycode, t_mlxvars *meta)
 {
 	t_player	*plr;
 
 	plr = &meta->plr;
-	if (key_hooks == TAB_KEY)
+	if (keycode == TAB_KEY)
 	{
 		if (meta->tex.minimap) 
 			meta->tex.minimap = 0;
@@ -124,5 +133,6 @@ int	key_hooks(int keycode, t_mlxvars *meta)
 	ft_move_plr_fb(keycode, plr, meta);
 	ft_move_plr_lr(keycode, plr, meta);
 	ft_rotate_cam(keycode, plr);
+	ft_change_pitch(keycode,&meta->tex);
 	return (0);
 }

@@ -23,7 +23,7 @@ void	ft_draw_cieiling_floor(t_mlxvars *meta, t_map map)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			if (y < WIN_HEIGHT / 2)//100 * 64)
+			if (y < ((WIN_HEIGHT / 2) + meta->tex.pitch))//100 * 64)
 				my_mlx_pixel_put(&meta->main, x, y, map.cieling_color);
 			else
 				my_mlx_pixel_put(&meta->main, x, y, map.floor_color);
@@ -76,7 +76,7 @@ void	ft_calc_wall_ray(t_player *plr, t_ray *ray, t_texture *tex)
 		ray->perpWallDist = (ray->sideDistY - ray->deltaDistY);
 	//Calculate height of line to draw on screen
 	tex->lineHeight = (int)(WIN_HEIGHT / ray->perpWallDist);
-	tex->pitch = 0; //provo a cambiarlo e vedo cosa cambia lol
+	//tex->pitch = 200; //provo a cambiarlo e vedo cosa cambia lol
 	//calculate lowest and highest pixel to fill in current stripe
 	tex->drawStart = -tex->lineHeight / 2 + WIN_HEIGHT / 2 + tex->pitch;
 	if (tex->drawStart < 0)

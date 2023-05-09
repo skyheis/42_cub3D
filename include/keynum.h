@@ -14,7 +14,7 @@
 # define KEYNUM_H
 
 # define B_ESC 65307
-# define TAB_KEY 0
+# define TAB_KEY 65289
 # define MIN_KEY 45
 # define MAG_KEY 61
 

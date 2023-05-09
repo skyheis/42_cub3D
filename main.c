@@ -53,6 +53,44 @@ void init_texture(t_texture *t, t_mlxvars meta, t_map map) //ancora da indirizza
 	t->imgs[2].addr = mlx_get_data_addr(t->imgs[2].img, &t->imgs[2].bits_per_pixel, &t->imgs[2].line_length, &t->imgs[2].endian);
 	t->imgs[3].img = mlx_xpm_file_to_image(meta.mlx, map.ea_file, &t->texWidth, &t->texHeight);
 	t->imgs[3].addr = mlx_get_data_addr(t->imgs[3].img, &t->imgs[3].bits_per_pixel, &t->imgs[3].line_length, &t->imgs[3].endian);
+	t->pitch = 0;
+}
+
+int	mouse_win3(int x,int y, void *p)
+{
+	t_mlxvars *meta;
+
+	meta = (t_mlxvars *)p;
+	//mlx_mouse_hide(meta->mlx, meta->win);
+	printf("Mouse moving, at %dx%d.\n",x,y);
+	mlx_mouse_move(meta->mlx, meta->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	//rotate to the right
+	if(x > WIN_WIDTH / 2)
+	{
+		//both camera direction and camera plane must be rotated
+		double oldDirX = meta->plr.dirX;
+		meta->plr.dirX = meta->plr.dirX * cos(-0.09) - meta->plr.dirY * sin(-0.09);
+		meta->plr.dirY = oldDirX * sin(-0.09) + meta->plr.dirY * cos(-0.09);
+		double oldPlaneX = meta->plr.planeX;
+		meta->plr.planeX = meta->plr.planeX * cos(-0.09) - meta->plr.planeY * sin(-0.09);
+		meta->plr.planeY = oldPlaneX * sin(-0.09) + meta->plr.planeY * cos(-0.09);
+	}
+	//rotate to the left
+	else if (x < WIN_WIDTH / 2)
+	{
+		//both camera direction and camera plane must be rotated
+		double oldDirX = meta->plr.dirX;
+		meta->plr.dirX = meta->plr.dirX * cos(0.09) - meta->plr.dirY * sin(0.09);
+		meta->plr.dirY = oldDirX * sin(0.09) + meta->plr.dirY * cos(0.09);
+		double oldPlaneX = meta->plr.planeX;
+		meta->plr.planeX = meta->plr.planeX * cos(0.09) - meta->plr.planeY * sin(0.09);
+		meta->plr.planeY = oldPlaneX * sin(0.09) + meta->plr.planeY * cos(0.09);
+	}
+	if (y < WIN_HEIGHT / 2)
+		meta->tex.pitch++;
+	else if (y > WIN_HEIGHT / 2)
+		meta->tex.pitch--;
+	return(0);
 }
 
 int	main(int ac, char **av)
@@ -72,6 +110,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(meta.mlx, big_draw, (void *)&meta);
 	mlx_hook(meta.win, 2, 1L<<0, key_hooks, &meta);
 	mlx_hook(meta.win, 17, 0L, ft_terminate, &meta);
+	mlx_hook(meta.win, 6, 1L<<6, mouse_win3, (void *)&meta);
 	mlx_loop(meta.mlx);
 	return(0);
 }
