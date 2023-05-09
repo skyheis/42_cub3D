@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:22:41 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/06 16:00:11 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:32:10 by gfantech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,41 +58,75 @@ void init_texture(t_texture *t, t_mlxvars meta, t_map map) //ancora da indirizza
 
 int	mouse_win3(int x,int y, void *p)
 {
-	t_mlxvars *meta;
+	t_mlxvars	*meta;
+	static int	oldX;
+	static int	oldY;
 
 	meta = (t_mlxvars *)p;
-	//mlx_mouse_hide(meta->mlx, meta->win);
-	printf("Mouse moving, at %dx%d.\n",x,y);
-	mlx_mouse_move(meta->mlx, meta->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
-	//rotate to the right
-	if(x > WIN_WIDTH / 2)
+	mlx_mouse_hide(meta->mlx, meta->win);
+	if(x - oldX > 0)
 	{
-		//both camera direction and camera plane must be rotated
 		double oldDirX = meta->plr.dirX;
-		meta->plr.dirX = meta->plr.dirX * cos(-0.09) - meta->plr.dirY * sin(-0.09);
-		meta->plr.dirY = oldDirX * sin(-0.09) + meta->plr.dirY * cos(-0.09);
+		meta->plr.dirX = meta->plr.dirX * cos(-0.01) - meta->plr.dirY * sin(-0.01);
+		meta->plr.dirY = oldDirX * sin(-0.01) + meta->plr.dirY * cos(-0.01);
 		double oldPlaneX = meta->plr.planeX;
-		meta->plr.planeX = meta->plr.planeX * cos(-0.09) - meta->plr.planeY * sin(-0.09);
-		meta->plr.planeY = oldPlaneX * sin(-0.09) + meta->plr.planeY * cos(-0.09);
+		meta->plr.planeX = meta->plr.planeX * cos(-0.01) - meta->plr.planeY * sin(-0.01);
+		meta->plr.planeY = oldPlaneX * sin(-0.01) + meta->plr.planeY * cos(-0.01);
 	}
-	//rotate to the left
-	else if (x < WIN_WIDTH / 2)
+	else if (x - oldX < 0)
 	{
-		//both camera direction and camera plane must be rotated
 		double oldDirX = meta->plr.dirX;
-		meta->plr.dirX = meta->plr.dirX * cos(0.09) - meta->plr.dirY * sin(0.09);
-		meta->plr.dirY = oldDirX * sin(0.09) + meta->plr.dirY * cos(0.09);
+		meta->plr.dirX = meta->plr.dirX * cos(0.01) - meta->plr.dirY * sin(0.01);
+		meta->plr.dirY = oldDirX * sin(0.01) + meta->plr.dirY * cos(0.01);
 		double oldPlaneX = meta->plr.planeX;
-		meta->plr.planeX = meta->plr.planeX * cos(0.09) - meta->plr.planeY * sin(0.09);
-		meta->plr.planeY = oldPlaneX * sin(0.09) + meta->plr.planeY * cos(0.09);
+		meta->plr.planeX = meta->plr.planeX * cos(0.01) - meta->plr.planeY * sin(0.01);
+		meta->plr.planeY = oldPlaneX * sin(0.01) + meta->plr.planeY * cos(0.01);
 	}
-	if (y < WIN_HEIGHT / 2)
-		meta->tex.pitch++;
-	else if (y > WIN_HEIGHT / 2)
-		meta->tex.pitch--;
+	if (y - oldY < 0)
+		meta->tex.pitch += 5;
+	else if (y - oldY > 0)
+		meta->tex.pitch -= 5;
+	oldX = x;
+	oldY = y;
 	return(0);
 }
 
+/*
+int	mouse_win3(int x,int y, void *p)
+{
+	t_mlxvars	*meta;
+	static int	oldX;
+	static int	oldY;
+
+	meta = (t_mlxvars *)p;
+	mlx_mouse_hide(meta->mlx, meta->win);
+	if(x - oldX > 0)
+	{
+		double oldDirX = meta->plr.dirX;
+		meta->plr.dirX = meta->plr.dirX * cos(-0.01) - meta->plr.dirY * sin(-0.01);
+		meta->plr.dirY = oldDirX * sin(-0.01) + meta->plr.dirY * cos(-0.01);
+		double oldPlaneX = meta->plr.planeX;
+		meta->plr.planeX = meta->plr.planeX * cos(-0.01) - meta->plr.planeY * sin(-0.01);
+		meta->plr.planeY = oldPlaneX * sin(-0.01) + meta->plr.planeY * cos(-0.01);
+	}
+	else if (x - oldX < 0)
+	{
+		double oldDirX = meta->plr.dirX;
+		meta->plr.dirX = meta->plr.dirX * cos(0.01) - meta->plr.dirY * sin(0.01);
+		meta->plr.dirY = oldDirX * sin(0.01) + meta->plr.dirY * cos(0.01);
+		double oldPlaneX = meta->plr.planeX;
+		meta->plr.planeX = meta->plr.planeX * cos(0.01) - meta->plr.planeY * sin(0.01);
+		meta->plr.planeY = oldPlaneX * sin(0.01) + meta->plr.planeY * cos(0.01);
+	}
+	if (y - oldY < 0)
+		meta->tex.pitch += 5;
+	else if (y - oldY > 0)
+		meta->tex.pitch -= 5;
+	oldX = x;
+	oldY = y;
+	return(0);
+}
+*/
 int	main(int ac, char **av)
 {
 	t_mlxvars	meta;
