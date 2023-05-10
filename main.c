@@ -6,7 +6,7 @@
 /*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:22:41 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/10 16:08:38 by gfantech         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:16:39 by gfantech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,36 +66,74 @@ void init_texture(t_texture *t, t_mlxvars meta, t_map map)
 int	mouse_win3(int x,int y, void *p)
 {
 	t_mlxvars *meta;
-	double	mouse_speed;
 
-	mouse_speed = 0.03;
 	meta = (t_mlxvars *)p;
 	mlx_mouse_hide(meta->mlx, meta->win);
+	if (x != 540 || y != 360)
+		printf("mouse at x: %d y: %d\n", x, y);
 	if(x > 540)
 	{
 		double oldDirX = meta->plr.dirX;
-		meta->plr.dirX = meta->plr.dirX * cos(-mouse_speed) - meta->plr.dirY * sin(-mouse_speed);
-		meta->plr.dirY = oldDirX * sin(-mouse_speed) + meta->plr.dirY * cos(-mouse_speed);
+		meta->plr.dirX = meta->plr.dirX * cos(-0.01) - meta->plr.dirY * sin(-0.01);
+		meta->plr.dirY = oldDirX * sin(-0.01) + meta->plr.dirY * cos(-0.01);
 		double oldPlaneX = meta->plr.planeX;
-		meta->plr.planeX = meta->plr.planeX * cos(-mouse_speed) - meta->plr.planeY * sin(-mouse_speed);
-		meta->plr.planeY = oldPlaneX * sin(-mouse_speed) + meta->plr.planeY * cos(-mouse_speed);
+		meta->plr.planeX = meta->plr.planeX * cos(-0.01) - meta->plr.planeY * sin(-0.01);
+		meta->plr.planeY = oldPlaneX * sin(-0.01) + meta->plr.planeY * cos(-0.01);
 	}
 	else if (x < WIN_WIDTH / 2)
 	{
 		double oldDirX = meta->plr.dirX;
-		meta->plr.dirX = meta->plr.dirX * cos(mouse_speed) - meta->plr.dirY * sin(mouse_speed);
-		meta->plr.dirY = oldDirX * sin(mouse_speed) + meta->plr.dirY * cos(mouse_speed);
+		meta->plr.dirX = meta->plr.dirX * cos(0.01) - meta->plr.dirY * sin(0.01);
+		meta->plr.dirY = oldDirX * sin(0.01) + meta->plr.dirY * cos(0.01);
 		double oldPlaneX = meta->plr.planeX;
-		meta->plr.planeX = meta->plr.planeX * cos(mouse_speed) - meta->plr.planeY * sin(mouse_speed);
-		meta->plr.planeY = oldPlaneX * sin(mouse_speed) + meta->plr.planeY * cos(mouse_speed);
+		meta->plr.planeX = meta->plr.planeX * cos(0.01) - meta->plr.planeY * sin(0.01);
+		meta->plr.planeY = oldPlaneX * sin(0.01) + meta->plr.planeY * cos(0.01);
 	}
 	if (y < WIN_HEIGHT / 2)
 		meta->tex.pitch += 5;
 	else if (y > WIN_HEIGHT / 2)
 		meta->tex.pitch -= 5;
-
+	mlx_mouse_move(meta->mlx, meta->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	//mlx_mouse_show(meta->mlx, meta->win);
 	return(0);
 }
+
+/*
+int	mouse_win3(int x,int y, void *p)
+{
+	t_mlxvars	*meta;
+	static int	oldX;
+	static int	oldY;
+
+	meta = (t_mlxvars *)p;
+	mlx_mouse_hide(meta->mlx, meta->win);
+	if(x - oldX > 0)
+	{
+		double oldDirX = meta->plr.dirX;
+		meta->plr.dirX = meta->plr.dirX * cos(-0.01) - meta->plr.dirY * sin(-0.01);
+		meta->plr.dirY = oldDirX * sin(-0.01) + meta->plr.dirY * cos(-0.01);
+		double oldPlaneX = meta->plr.planeX;
+		meta->plr.planeX = meta->plr.planeX * cos(-0.01) - meta->plr.planeY * sin(-0.01);
+		meta->plr.planeY = oldPlaneX * sin(-0.01) + meta->plr.planeY * cos(-0.01);
+	}
+	else if (x - oldX < 0)
+	{
+		double oldDirX = meta->plr.dirX;
+		meta->plr.dirX = meta->plr.dirX * cos(0.01) - meta->plr.dirY * sin(0.01);
+		meta->plr.dirY = oldDirX * sin(0.01) + meta->plr.dirY * cos(0.01);
+		double oldPlaneX = meta->plr.planeX;
+		meta->plr.planeX = meta->plr.planeX * cos(0.01) - meta->plr.planeY * sin(0.01);
+		meta->plr.planeY = oldPlaneX * sin(0.01) + meta->plr.planeY * cos(0.01);
+	}
+	if (y - oldY < 0)
+		meta->tex.pitch += 5;
+	else if (y - oldY > 0)
+		meta->tex.pitch -= 5;
+	oldX = x;
+	oldY = y;
+	return(0);
+}
+*/
 
 int	main(int ac, char **av)
 {
@@ -103,19 +141,18 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (1);
-	meta.mouse = false;
 	ft_get_map(&meta.map, av[1]);
+//	ft_terminate(&meta);
 	meta.mlx = mlx_init();
 	meta.win = mlx_new_window(meta.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	//potremmo settarla a NULL e fare il destroy solo se not NULL
 	meta.main.img = NULL;
 	init_player(&meta.plr, meta.map);
 	init_texture(&meta.tex, meta, meta.map);
+	mlx_loop_hook(meta.mlx, big_draw, (void *)&meta);
 	mlx_hook(meta.win, 2, 1L<<0, key_hooks, &meta);
 	mlx_hook(meta.win, 17, 0L, ft_terminate, &meta);
 	mlx_hook(meta.win, 6, 1L<<6, mouse_win3, (void *)&meta);
-	mlx_hook(meta.win, 9, 1L<<21, focus_in, (void *)&meta);
-	mlx_hook(meta.win, 10, 1L<<21, focus_out, (void *)&meta);
-	mlx_loop_hook(meta.mlx, big_draw, (void *)&meta);
 	mlx_loop(meta.mlx);
 	return(0);
 }

@@ -6,11 +6,7 @@
 /*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:53:59 by ggiannit          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/10 15:52:50 by gfantech         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/10 10:10:01 by ggiannit         ###   ########.fr       */
->>>>>>> 02e1e0763adc0a4fbf1fff0ebba25799bd9d3052
+/*   Updated: 2023/05/10 16:16:41 by gfantech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +52,7 @@ int big_draw(void *voidmeta)
 {
 	int			x;
 	t_mlxvars	*meta;
-	double		frame_time;
+	double		frameTime;
 
 	x = 0;
 	meta = (t_mlxvars *)voidmeta;
@@ -78,12 +74,12 @@ int big_draw(void *voidmeta)
 	//timing for input and FPS counter
 	meta->ray.oldTime = meta->ray.time;
 	meta->ray.time = get_time();
-	frame_time = (meta->ray.time - meta->ray.oldTime) / 1000.0; //frametime is the time this frame has taken, in seconds
+	frameTime = (meta->ray.time - meta->ray.oldTime) / 1000.0; //frametime is the time this frame has taken, in seconds
 	//speed modifiers
 //	printf("frameTime: %f\n", frameTime);
 	//meta->plr.moveSpeed = frameTime * 10.0; //the constant value is in squares/second
 	//meta->plr.rotSpeed = frameTime * 8.0; //the constant value is in radians/second
-	(void) frame_time;
+	(void) frameTime;
 	meta->plr.moveSpeed = 0.1; //the constant value is in squares/second
 	meta->plr.rotSpeed = 0.09; //the constant value is in radians/second
 	mlx_put_image_to_window(meta->mlx, meta->win, meta->main.img, 0,0);
