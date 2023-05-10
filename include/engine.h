@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:18:52 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/06 17:41:55 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:02:37 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ typedef struct	s_texture
 	double texPos;
 	int	minimap;
 	t_data	plricon[3];
+	int icon8w;
+	int icon8h;
+	int icon16w;
+	int icon16h;
+	int icon32w;
+	int icon32h;
 	int mapf;
 }				t_texture;
 
