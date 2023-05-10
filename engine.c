@@ -6,7 +6,7 @@
 /*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:53:59 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/10 16:16:41 by gfantech         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:24:37 by gfantech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ int big_draw(void *voidmeta)
 	mlx_put_image_to_window(meta->mlx, meta->win, meta->main.img, 0,0);
 	if (meta->tex.minimap)
 		ft_draw_minimap(meta, meta->map);
+	if (meta->mouse == true)
+		mlx_mouse_move(meta->mlx, meta->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	return (0);
 }

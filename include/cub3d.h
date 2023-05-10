@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 10:56:02 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/06 18:17:45 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:24:43 by gfantech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_mlxvars
 	t_player	plr;
 	t_ray		ray;
 	t_texture	tex;
+	bool		mouse;
 }				t_mlxvars;
 
 /* map map_utils map_split*/
@@ -72,6 +73,8 @@ void	ft_draw_cieiling_floor(t_mlxvars *meta, t_map map);
 long long	get_time(void);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			get_tex_color(t_texture *tex, int tex_num);
+int			focus_in(void *p);
+int			focus_out(void *p);
 
 /* key hooks */
 int	ft_terminate(t_mlxvars *meta);
