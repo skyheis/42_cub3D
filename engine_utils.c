@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 23:14:46 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/05 23:15:19 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:04:44 by gfantech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,22 @@ int	get_tex_color(t_texture *tex, int tex_num)
 		return (*(int*)(tex->imgs[tex_num].addr + (4 * tex->texWidth * (int)tex->texY) + (4 * (int)tex->texX)));
 	}
 	return (0x0);
+}
+
+int	focus_in(void *p)
+{
+	t_mlxvars	*meta;
+
+	meta = (t_mlxvars *)p;
+	meta->mouse = true;
+	return (0);
+}
+
+int	focus_out(void *p)
+{
+	t_mlxvars	*meta;
+
+	meta = (t_mlxvars *)p;
+	meta->mouse = false;
+	return (0);
 }
