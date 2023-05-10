@@ -6,7 +6,7 @@
 /*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:53:59 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/10 16:24:37 by gfantech         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:30:00 by gfantech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ int big_draw(void *voidmeta)
 
 		x++;
 	}
-
 	ft_pickaxe(meta);
-
 	//timing for input and FPS counter
 	meta->ray.oldTime = meta->ray.time;
 	meta->ray.time = get_time();
