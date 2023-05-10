@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 23:20:26 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/06 13:40:19 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:36:10 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,6 @@ void ft_change_pitch(int keycode, t_texture *tex)
 	else if (keycode == DOWN)
 		tex->pitch -= 30;
 }
-
-
 
 int	key_hooks(int keycode, t_mlxvars *meta)
 {

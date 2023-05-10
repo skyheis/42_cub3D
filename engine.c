@@ -6,7 +6,7 @@
 /*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:53:59 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/09 17:59:02 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:10:01 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_reset_main_img(t_data *main, t_mlxvars meta)
 			&main->line_length, &main->endian);
 }
 
-void	ft_test(t_mlxvars *meta)
+void	ft_pickaxe(t_mlxvars *meta)
 {
 	int x;
 	int y;
@@ -51,12 +51,10 @@ void	ft_test(t_mlxvars *meta)
 int big_draw(void *voidmeta)
 {
 	int			x;
-	int			minizoom;
 	t_mlxvars	*meta;
 	double		frameTime;
 
 	x = 0;
-	minizoom = -1;
 	meta = (t_mlxvars *)voidmeta;
 	ft_reset_main_img(&meta->main, *meta);
 	ft_draw_cieiling_floor(meta, meta->map);
@@ -71,10 +69,8 @@ int big_draw(void *voidmeta)
 		x++;
 	}
 
-	ft_test(meta);
+	ft_pickaxe(meta);
 
-	if (meta->tex.minimap)
-		minizoom = ft_draw_minimap(meta, meta->map);
 	//timing for input and FPS counter
 	meta->ray.oldTime = meta->ray.time;
 	meta->ray.time = get_time();
@@ -87,8 +83,7 @@ int big_draw(void *voidmeta)
 	meta->plr.moveSpeed = 0.1; //the constant value is in squares/second
 	meta->plr.rotSpeed = 0.09; //the constant value is in radians/second
 	mlx_put_image_to_window(meta->mlx, meta->win, meta->main.img, 0,0);
-	if (minizoom >= 10)
-		mlx_put_image_to_window(meta->mlx, meta->win, meta->tex.plricon[meta->tex.mapf].img, 42 + (int) (meta->plr.posY * minizoom), 42 + (int) (meta->plr.posX * minizoom));
-	//print to text qua per gli fps
+	if (meta->tex.minimap)
+		ft_draw_minimap(meta, meta->map);
 	return (0);
 }

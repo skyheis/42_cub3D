@@ -6,20 +6,21 @@
 /*   By: gfantech <gfantech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 21:22:41 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/09 15:51:24 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:13:28 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*plr->dirY = 0.0; //initial direction vector */
 void init_player(t_player *plr, t_map map)
 {
-	plr->posX = (double) map.player[X] + 0.5;
-	plr->posY = (double) map.player[Y] + 0.5;
+	plr->posX = (double) map.player[X] + 0.5001;
+	plr->posY = (double) map.player[Y] + 0.5001;
 	if (map.player[Z] == 'N' || map.player[Z] == 'S')
 	{
 		plr->dirX = 1.0;
-		plr->dirY = 0.0; //initial direction vector
+		plr->dirY = 0.0;
 		plr->planeX = 0.0;
 		plr->planeY = 0.66;
 		if (map.player[Z] == 'N')
@@ -30,7 +31,7 @@ void init_player(t_player *plr, t_map map)
 	else
 	{
 		plr->dirX = 0.001;
-		plr->dirY = 1.0; //initial direction vector
+		plr->dirY = 1.0;
 		plr->planeX = 0.66;
 		plr->planeY = 0.0;
 		if (map.player[Z] == 'W')
@@ -41,14 +42,13 @@ void init_player(t_player *plr, t_map map)
 	}
 }
 
-void init_texture(t_texture *t, t_mlxvars meta, t_map map) //ancora da indirizzare le 4 immagini
+void init_texture(t_texture *t, t_mlxvars meta, t_map map)
 {
-	//check dei file?
-	t->plricon[0].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow8.xpm", &t->texWidth, &t->texHeight);
+	t->plricon[0].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow8.xpm", &t->icon8w, &t->icon8h);
 	t->plricon[0].addr = mlx_get_data_addr(t->plricon[0].img, &t->plricon[0].bits_per_pixel, &t->plricon[0].line_length, &t->plricon[0].endian);
-	t->plricon[1].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow16.xpm", &t->texWidth, &t->texHeight);
+	t->plricon[1].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow16.xpm", &t->icon16w, &t->icon16h);
 	t->plricon[1].addr = mlx_get_data_addr(t->plricon[1].img, &t->plricon[1].bits_per_pixel, &t->plricon[1].line_length, &t->plricon[1].endian);
-	t->plricon[2].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow32.xpm", &t->texWidth, &t->texHeight);
+	t->plricon[2].img = mlx_xpm_file_to_image(meta.mlx, "pics/cow32.xpm", &t->icon32w, &t->icon32h);
 	t->plricon[2].addr = mlx_get_data_addr(t->plricon[2].img, &t->plricon[2].bits_per_pixel, &t->plricon[2].line_length, &t->plricon[2].endian);
 	t->imgs[0].img = mlx_xpm_file_to_image(meta.mlx, map.no_file, &t->texWidth, &t->texHeight);
 	t->imgs[0].addr = mlx_get_data_addr(t->imgs[0].img, &t->imgs[0].bits_per_pixel, &t->imgs[0].line_length, &t->imgs[0].endian);
@@ -142,10 +142,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (1);
 	ft_get_map(&meta.map, av[1]);
-//	ft_terminate(&meta);
 	meta.mlx = mlx_init();
 	meta.win = mlx_new_window(meta.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
-	//potremmo settarla a NULL e fare il destroy solo se not NULL
 	meta.main.img = NULL;
 	init_player(&meta.plr, meta.map);
 	init_texture(&meta.tex, meta, meta.map);

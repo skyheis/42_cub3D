@@ -6,7 +6,7 @@
 /*   By: ggiannit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:24:49 by ggiannit          #+#    #+#             */
-/*   Updated: 2023/05/06 16:43:54 by ggiannit         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:14:28 by ggiannit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,21 @@ void	ft_init_map(t_map *map)
 	map->cieling_color = -1;
 }
 
-/* pass &map and av[1] */
-void	ft_printmatrix(char **mat);
+void	ft_get_map(t_map *map, char *filename)
+{
+	int		i;
 
+	ft_check_infile(filename);
+	ft_init_map(map);
+	ft_read_map(map, filename);
+	i = ft_set_config(map);
+	map->map = ft_splitmap(map, &map->map_memory[i]);
+	ft_free_null(&map->map_memory);
+	ft_findplayer(map);
+	ft_checkmap(map);
+}
+
+/* for debug
 void	ft_get_map(t_map *map, char *filename)
 {
 	int		i;
@@ -120,7 +132,6 @@ void	ft_get_map(t_map *map, char *filename)
 	printf("ok player\n");
 	ft_checkmap(map);
 	printf("ok map\n");
-	//ft_printmatrix(map->map);
 	printf("player:\nx %i\ny %i\nv %c\n", map->player[0], map->player[1], (char) map->player[2]);
 }
 
@@ -136,7 +147,7 @@ void	ft_printmatrix(char **mat)
 	}
 }
 
-/*int	main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_map	map;
 
