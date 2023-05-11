@@ -14,7 +14,7 @@
 #ifndef ENGINE_H
 # define ENGINE_H
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void	*img;
 	char	*addr;
@@ -23,9 +23,8 @@ typedef struct	s_data
 	int		endian;
 }				t_data;
 
-typedef struct	s_player
+typedef struct s_player
 {
-	/*PLAYER DATA*/
 	double	posX;
 	double	posY;
 	double	dirX;
@@ -36,10 +35,7 @@ typedef struct	s_player
 	double	rotSpeed;
 }				t_player;
 
-typedef struct	s_ray
-{
-	/*RAY DATA*/
-	//calculate ray position and direction
+/* 	//calculate ray position and direction
 	double cameraX;//x-coordinate in camera space
 	double rayDirX;
 	double rayDirY;
@@ -60,17 +56,29 @@ typedef struct	s_ray
 	int side; //was a NS or a EW wall hit?
 	int dio;
 	double time; //time of current frame
-	double oldTime; //time of previous frame
+	double oldTime; //time of previous frame */
+typedef struct s_ray
+{
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+	int		dio;
+	double	time;
+	double	oldTime;
 }				t_ray;
 
-typedef struct	s_texture
-{
-	t_data imgs[4];
-	int	texWidth;
-	int texHeight;
-	int lineHeight;
-	int pitch;
-	//calculate lowest and highest pixel to fill in current stripe
+/* 	//calculate lowest and highest pixel to fill in current stripe
 	int drawStart;
 	int drawEnd;
 	//calculate value of wallX
@@ -82,27 +90,44 @@ typedef struct	s_texture
 	double step;
 	// Starting texture coordinate
 	double texPos;
-	int	minimap;
+	int	minimap; */
+typedef struct s_texture
+{
+	t_data	imgs[4];
+	int		texWidth;
+	int		texHeight;
+	int		lineHeight;
+	int		pitch;
+	int		drawStart;
+	int		drawEnd;
+	double	wallX;
+	int		texX;
+	int		texY;
+	double	step;
+	double	texPos;
+	int		minimap;
 	t_data	plricon[3];
-	int icon8w;
-	int icon8h;
-	int icon16w;
-	int icon16h;
-	int icon32w;
-	int icon32h;
-	int mapf;
+	int		icon8w;
+	int		icon8h;
+	int		icon16w;
+	int		icon16h;
+	int		icon32w;
+	int		icon32h;
+	int		mapf;
+	int		picx;
+	int		picy;
 }				t_texture;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char	**map;
 	char	*map_memory;
 	int		width;
 	int		hight;
-	char	*no_file;;
-	char	*so_file;;
-	char	*we_file;;
-	char	*ea_file;;
+	char	*no_file;
+	char	*so_file;
+	char	*we_file;
+	char	*ea_file;
 	int		floor_color;
 	int		cieling_color;
 	int		player[3];

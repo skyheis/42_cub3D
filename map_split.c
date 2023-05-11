@@ -54,7 +54,7 @@ static int	ft_longestline(char *str)
 static int	ft_countlines(char *str)
 {
 	int	i;
-	int bn;
+	int	bn;
 
 	i = 0;
 	bn = 0;
@@ -69,8 +69,8 @@ static int	ft_countlines(char *str)
 
 char	**ft_splitmap(t_map *map, char *onlymap)
 {
-	int	i;
-	int	y;
+	int		i;
+	int		y;
 	char	**split;
 
 	i = 0;

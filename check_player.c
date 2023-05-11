@@ -15,7 +15,7 @@
 static int	ft_isplayer(char c)
 {
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
-			return (1);
+		return (1);
 	return (0);
 }
 

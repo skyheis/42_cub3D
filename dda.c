@@ -18,7 +18,7 @@ void	ft_perform_dda(t_ray *ray, t_map *map)
 {
 	while (ray->hit == 0)
 	{
-		if(ray->sideDistX < ray->sideDistY)
+		if (ray->sideDistX < ray->sideDistY)
 		{
 			ray->sideDistX += ray->deltaDistX;
 			ray->mapX += ray->stepX;
@@ -38,7 +38,7 @@ void	ft_perform_dda(t_ray *ray, t_map *map)
 			else
 				ray->dio = 3;
 		}
-		if(map->map[ray->mapX][ray->mapY] == '1')
+		if (map->map[ray->mapX][ray->mapY] == '1')
 			ray->hit = 1;
 	}
 }
@@ -78,11 +78,11 @@ void	ft_set_dda(int x, t_player *plr, t_ray *ray)
 	ray->rayDirY = plr->dirY + plr->planeY * ray->cameraX;
 	ray->mapX = (int)plr->posX;
 	ray->mapY = (int)plr->posY;
-	if (ray->rayDirX == 0) 
+	if (ray->rayDirX == 0)
 		ray->deltaDistX = 1e30;
 	else
 		ray->deltaDistX = fabs(1 / ray->rayDirX);
-	if (ray->rayDirX == 0) 
+	if (ray->rayDirX == 0)
 		ray->deltaDistY = 1e30;
 	else
 		ray->deltaDistY = fabs(1 / ray->rayDirY);

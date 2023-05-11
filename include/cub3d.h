@@ -49,25 +49,27 @@ typedef struct s_mlxvars
 }				t_mlxvars;
 
 /* map map_utils map_split*/
-char	**ft_splitmap(t_map *map, char *onlymap);
-int		ft_substrlen(char *str);
-int		ft_isallset(t_map *map);
-void	ft_get_fc_color(t_map *map, char *mapmem, int *i, int *color);
-void	ft_wallimage_path(t_map *map, char *mapmem, int *i, char **wallpath);
-void	ft_get_map(t_map *map, char *filename);
+char		**ft_splitmap(t_map *map, char *onlymap);
+int			ft_substrlen(char *str);
+int			ft_isallset(t_map *map);
+void		ft_get_fc_color(t_map *map, char *mapmem, int *i, int *color);
+void		ft_wallimage_path(t_map *map, char *mapmem,
+				int *i, char **wallpath);
+void		ft_get_map(t_map *map, char *filename);
 
 /* check_player map */
-void	ft_checkmap(t_map *map);
-void	ft_findplayer(t_map *map);
+void		ft_checkmap(t_map *map);
+void		ft_findplayer(t_map *map);
 
 /* dda */
-void	ft_perform_dda(t_ray *ray, t_map *map);
-void	ft_set_dda(int x, t_player *plr, t_ray *ray);
+void		ft_perform_dda(t_ray *ray, t_map *map);
+void		ft_set_dda(int x, t_player *plr, t_ray *ray);
 
 /* draw wall line */
-void	ft_draw_wall_line(int x, t_mlxvars *meta, t_ray *ray, t_texture *tex);
-void	ft_calc_wall_ray(t_player *plr, t_ray *ray, t_texture *tex);
-void	ft_draw_cieiling_floor(t_mlxvars *meta, t_map map);
+void		ft_draw_wall_line(int x, t_mlxvars *meta,
+				t_ray *ray, t_texture *tex);
+void		ft_calc_wall_ray(t_player *plr, t_ray *ray, t_texture *tex);
+void		ft_draw_cieiling_floor(t_mlxvars *meta, t_map map);
 
 /* engine utils */
 long long	get_time(void);
@@ -77,16 +79,23 @@ int			focus_in(void *p);
 int			focus_out(void *p);
 
 /* key hooks */
-int	ft_terminate(t_mlxvars *meta);
-void	ft_destroy(t_mlxvars *meta);
-int	key_hooks(int keycode, t_mlxvars *meta);
+int			ft_terminate(t_mlxvars *meta);
+void		ft_destroy(t_mlxvars *meta);
+int			key_hooks(int keycode, t_mlxvars *meta);
 
-int big_draw(void * voidmeta);
+int			big_draw(void *voidmeta);
 
 /* handle error */
-void	ft_exit_map(t_map *map, char *str);
+void		ft_exit_map(t_map *map, char *str);
 
 /* minimap */
-int ft_draw_minimap(t_mlxvars *meta, t_map map);
+int			ft_draw_minimap(t_mlxvars *meta, t_map map);
+
+/* mouse moving */
+int			ft_mouse_win3(int x, int y, void *p);
+
+/* move player */
+void		ft_move_plr_fb(int keycode, t_player *plr, t_mlxvars *meta);
+void		ft_move_plr_lr(int keycode, t_player *plr, t_mlxvars *meta);
 
 #endif

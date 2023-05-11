@@ -15,7 +15,7 @@
 static int	ft_isvalidmap(char c)
 {
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W' || c == '0')
-			return (1);
+		return (1);
 	return (0);
 }
 
