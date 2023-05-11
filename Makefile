@@ -73,7 +73,7 @@ clean:
 	@echo "$(RED)All $(CYAN)$(NAME)$(RED)'s objects removed with $(WHITE)${RM}$(DEF_COLOR) 🧹" 
 
 fclean: clean
-	@${RM} ${PRNAME} archive/libft.a archive/libmlx.a
+	@${RM} ${PRNAME} archive/libft.a archive/libmlx.a include/mlx.h
 	@echo "$(RED)..and $(CYAN)${NAME} $(RED)as been removed$(DEF_COLOR) 🚮"
 
 libft:

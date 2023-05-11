@@ -16,21 +16,21 @@ void	ft_move_plr_fb(int keycode, t_player *plr, t_mlxvars *meta)
 {
 	if (keycode == W_KEY)
 	{
-		if (meta->map.map[(int)(plr->posX + plr->dirX * plr->moveSpeed)]
-			[(int)plr->posY] == '.')
-			plr->posX += plr->dirX * plr->moveSpeed;
-		if (meta->map.map[(int)plr->posX]
-			[(int)(plr->posY + plr->dirY * plr->moveSpeed)] == '.')
-			plr->posY += plr->dirY * plr->moveSpeed;
+		if (meta->map.map[(int)(plr->posx + plr->dirx * plr->move_speed)]
+			[(int)plr->posy] == '.')
+			plr->posx += plr->dirx * plr->move_speed;
+		if (meta->map.map[(int)plr->posx]
+			[(int)(plr->posy + plr->diry * plr->move_speed)] == '.')
+			plr->posy += plr->diry * plr->move_speed;
 	}
 	if (keycode == S_KEY)
 	{
-		if (meta->map.map[(int)(plr->posX - plr->dirX * plr->moveSpeed)]
-			[(int)plr->posY] == '.')
-			plr->posX -= plr->dirX * plr->moveSpeed;
-		if (meta->map.map[(int)plr->posX]
-			[(int)(plr->posY - plr->dirY * plr->moveSpeed)] == '.')
-			plr->posY -= plr->dirY * plr->moveSpeed;
+		if (meta->map.map[(int)(plr->posx - plr->dirx * plr->move_speed)]
+			[(int)plr->posy] == '.')
+			plr->posx -= plr->dirx * plr->move_speed;
+		if (meta->map.map[(int)plr->posx]
+			[(int)(plr->posy - plr->diry * plr->move_speed)] == '.')
+			plr->posy -= plr->diry * plr->move_speed;
 	}
 }
 
@@ -38,20 +38,20 @@ void	ft_move_plr_lr(int keycode, t_player *plr, t_mlxvars *meta)
 {
 	if (keycode == A_KEY)
 	{
-		if (meta->map.map[(int)(plr->posX - plr->dirY * plr->moveSpeed)]
-			[(int)plr->posY] == '.')
-			plr->posX -= plr->dirY * plr->moveSpeed;
-		if (meta->map.map[(int)plr->posX]
-			[(int)(plr->posY + plr->dirX * plr->moveSpeed)] == '.')
-			plr->posY += plr->dirX * plr->moveSpeed;
+		if (meta->map.map[(int)(plr->posx - plr->diry * plr->move_speed)]
+			[(int)plr->posy] == '.')
+			plr->posx -= plr->diry * plr->move_speed;
+		if (meta->map.map[(int)plr->posx]
+			[(int)(plr->posy + plr->dirx * plr->move_speed)] == '.')
+			plr->posy += plr->dirx * plr->move_speed;
 	}
 	if (keycode == D_KEY)
 	{
-		if (meta->map.map[(int)(plr->posX + plr->dirY * plr->moveSpeed)]
-			[(int)plr->posY] == '.')
-			plr->posX += plr->dirY * plr->moveSpeed;
-		if (meta->map.map[(int)plr->posX]
-			[(int)(plr->posY - plr->dirX * plr->moveSpeed)] == '.')
-			plr->posY -= plr->dirX * plr->moveSpeed;
+		if (meta->map.map[(int)(plr->posx + plr->diry * plr->move_speed)]
+			[(int)plr->posy] == '.')
+			plr->posx += plr->diry * plr->move_speed;
+		if (meta->map.map[(int)plr->posx]
+			[(int)(plr->posy - plr->dirx * plr->move_speed)] == '.')
+			plr->posy -= plr->dirx * plr->move_speed;
 	}
 }

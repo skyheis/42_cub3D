@@ -15,42 +15,42 @@
 /* both camera direction and camera plane must be rotated */
 void	ft_rotate_cam_l(int keycode, t_player *plr)
 {
-	double	oldDirX;
-	double	oldPlaneX;
+	double	old_dirx;
+	double	old_planex;
 
 	if (keycode == LEFT)
 	{
-		oldDirX = plr->dirX;
-		plr->dirX = plr->dirX * cos(plr->rotSpeed)
-			- plr->dirY * sin(plr->rotSpeed);
-		plr->dirY = oldDirX * sin(plr->rotSpeed)
-			+ plr->dirY * cos(plr->rotSpeed);
-		oldPlaneX = plr->planeX;
-		plr->planeX = plr->planeX * cos(plr->rotSpeed)
-			- plr->planeY * sin(plr->rotSpeed);
-		plr->planeY = oldPlaneX * sin(plr->rotSpeed)
-			+ plr->planeY * cos(plr->rotSpeed);
+		old_dirx = plr->dirx;
+		plr->dirx = plr->dirx * cos(plr->rot_speed)
+			- plr->diry * sin(plr->rot_speed);
+		plr->diry = old_dirx * sin(plr->rot_speed)
+			+ plr->diry * cos(plr->rot_speed);
+		old_planex = plr->planex;
+		plr->planex = plr->planex * cos(plr->rot_speed)
+			- plr->planey * sin(plr->rot_speed);
+		plr->planey = old_planex * sin(plr->rot_speed)
+			+ plr->planey * cos(plr->rot_speed);
 	}
 }
 
 /* both camera direction and camera plane must be rotated */
 void	ft_rotate_cam_r(int keycode, t_player *plr)
 {
-	double	oldDirX;
-	double	oldPlaneX;
+	double	old_dirx;
+	double	old_planex;
 
 	if (keycode == RIGHT)
 	{
-		oldDirX = plr->dirX;
-		plr->dirX = plr->dirX * cos(-plr->rotSpeed)
-			- plr->dirY * sin(-plr->rotSpeed);
-		plr->dirY = oldDirX * sin(-plr->rotSpeed)
-			+ plr->dirY * cos(-plr->rotSpeed);
-		oldPlaneX = plr->planeX;
-		plr->planeX = plr->planeX * cos(-plr->rotSpeed)
-			- plr->planeY * sin(-plr->rotSpeed);
-		plr->planeY = oldPlaneX * sin(-plr->rotSpeed)
-			+ plr->planeY * cos(-plr->rotSpeed);
+		old_dirx = plr->dirx;
+		plr->dirx = plr->dirx * cos(-plr->rot_speed)
+			- plr->diry * sin(-plr->rot_speed);
+		plr->diry = old_dirx * sin(-plr->rot_speed)
+			+ plr->diry * cos(-plr->rot_speed);
+		old_planex = plr->planex;
+		plr->planex = plr->planex * cos(-plr->rot_speed)
+			- plr->planey * sin(-plr->rot_speed);
+		plr->planey = old_planex * sin(-plr->rot_speed)
+			+ plr->planey * cos(-plr->rot_speed);
 	}
 }
 

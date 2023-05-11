@@ -14,36 +14,36 @@
 
 static void	ft_mouse_move_b(int x, int y, double mouse_speed, t_mlxvars *meta)
 {
-	double	oldDirX;
-	double	oldPlaneX;
+	double	old_dirx;
+	double	old_planex;
 
-	oldDirX = meta->plr.dirX;
-	meta->plr.dirX = meta->plr.dirX * cos(mouse_speed)
-		- meta->plr.dirY * sin(mouse_speed);
-	meta->plr.dirY = oldDirX * sin(mouse_speed)
-		+ meta->plr.dirY * cos(mouse_speed);
-	oldPlaneX = meta->plr.planeX;
-	meta->plr.planeX = meta->plr.planeX * cos(mouse_speed)
-		- meta->plr.planeY * sin(mouse_speed);
-	meta->plr.planeY = oldPlaneX * sin(mouse_speed)
-		+ meta->plr.planeY * cos(mouse_speed);
+	old_dirx = meta->plr.dirx;
+	meta->plr.dirx = meta->plr.dirx * cos(mouse_speed)
+		- meta->plr.diry * sin(mouse_speed);
+	meta->plr.diry = old_dirx * sin(mouse_speed)
+		+ meta->plr.diry * cos(mouse_speed);
+	old_planex = meta->plr.planex;
+	meta->plr.planex = meta->plr.planex * cos(mouse_speed)
+		- meta->plr.planey * sin(mouse_speed);
+	meta->plr.planey = old_planex * sin(mouse_speed)
+		+ meta->plr.planey * cos(mouse_speed);
 }
 
 static void	ft_mouse_move_a(int x, int y, double mouse_speed, t_mlxvars *meta)
 {
-	double	oldDirX;
-	double	oldPlaneX;
+	double	old_dirx;
+	double	old_planex;
 
-	oldDirX = meta->plr.dirX;
-	meta->plr.dirX = meta->plr.dirX * cos(-mouse_speed)
-		- meta->plr.dirY * sin(-mouse_speed);
-	meta->plr.dirY = oldDirX * sin(-mouse_speed)
-		+ meta->plr.dirY * cos(-mouse_speed);
-	oldPlaneX = meta->plr.planeX;
-	meta->plr.planeX = meta->plr.planeX * cos(-mouse_speed)
-		- meta->plr.planeY * sin(-mouse_speed);
-	meta->plr.planeY = oldPlaneX * sin(-mouse_speed)
-		+ meta->plr.planeY * cos(-mouse_speed);
+	old_dirx = meta->plr.dirx;
+	meta->plr.dirx = meta->plr.dirx * cos(-mouse_speed)
+		- meta->plr.diry * sin(-mouse_speed);
+	meta->plr.diry = old_dirx * sin(-mouse_speed)
+		+ meta->plr.diry * cos(-mouse_speed);
+	old_planex = meta->plr.planex;
+	meta->plr.planex = meta->plr.planex * cos(-mouse_speed)
+		- meta->plr.planey * sin(-mouse_speed);
+	meta->plr.planey = old_planex * sin(-mouse_speed)
+		+ meta->plr.planey * cos(-mouse_speed);
 }
 
 int	ft_mouse_win3(int x, int y, void *p)

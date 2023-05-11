@@ -68,8 +68,8 @@ int	big_draw(void *voidmeta)
 		x++;
 	}
 	ft_pickaxe(meta);
-	meta->plr.moveSpeed = 0.1;
-	meta->plr.rotSpeed = 0.09;
+	meta->plr.move_speed = 0.1;
+	meta->plr.rot_speed = 0.09;
 	mlx_put_image_to_window(meta->mlx, meta->win, meta->main.img, 0, 0);
 	if (meta->tex.minimap)
 		ft_draw_minimap(meta, meta->map);
@@ -79,7 +79,7 @@ int	big_draw(void *voidmeta)
 }
 
 /* 	double		frameTime;
-	meta->ray.oldTime = meta->ray.time;
+	meta->ray.oldtime = meta->ray.time;
 	meta->ray.time = get_time();
-	frameTime = (meta->ray.time - meta->ray.oldTime) / 1000.0;
+	frameTime = (meta->ray.time - meta->ray.oldtime) / 1000.0;
 	(void) frameTime; */

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef ENGINE_H
 # define ENGINE_H
 
@@ -25,86 +24,86 @@ typedef struct s_data
 
 typedef struct s_player
 {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	double	moveSpeed;
-	double	rotSpeed;
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+	double	move_speed;
+	double	rot_speed;
 }				t_player;
 
 /* 	//calculate ray position and direction
-	double cameraX;//x-coordinate in camera space
-	double rayDirX;
-	double rayDirY;
+	double camera_x;//x-coordinate in camera space
+	double ray_dirx;
+	double ray_diry;
 	//which box of the map we're in
-	int mapX;
-	int mapY;
+	int mapx;
+	int mapy;
 	//length of ray from current position to next x or y-side
-	double sideDistX;
-	double sideDistY;
+	double side_distx;
+	double side_disty;
 	//length of ray from one x or y-side to next x or y-side
-	double deltaDistX;
-	double deltaDistY;
-	double perpWallDist;
+	double delta_distx;
+	double delta_disty;
+	double perp_walldist;
 	//what direction to step in x or y-direction (either +1 or -1)
-	int stepX;
-	int stepY;
+	int stepx;
+	int step_y;
 	int hit; //was there a wall hit?
 	int side; //was a NS or a EW wall hit?
 	int dio;
 	double time; //time of current frame
-	double oldTime; //time of previous frame */
+	double oldtime; //time of previous frame */
 typedef struct s_ray
 {
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	int		mapX;
-	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	int		stepX;
-	int		stepY;
+	double	camera_x;
+	double	ray_dirx;
+	double	ray_diry;
+	int		mapx;
+	int		mapy;
+	double	side_distx;
+	double	side_disty;
+	double	delta_distx;
+	double	delta_disty;
+	double	perp_walldist;
+	int		step_x;
+	int		step_y;
 	int		hit;
 	int		side;
 	int		dio;
 	double	time;
-	double	oldTime;
+	double	oldtime;
 }				t_ray;
 
 /* 	//calculate lowest and highest pixel to fill in current stripe
-	int drawStart;
-	int drawEnd;
-	//calculate value of wallX
-	double wallX; //where exactly the wall was hit
+	int draw_start;
+	int draw_end;
+	//calculate value of wallx
+	double wallx; //where exactly the wall was hit
 	//x coordinate on the texture
-	int texX;
-	int texY;
+	int tex_x;
+	int tex_y;
 	// How much to increase the texture coordinate per screen pixel
 	double step;
 	// Starting texture coordinate
-	double texPos;
+	double tex_pos;
 	int	minimap; */
 typedef struct s_texture
 {
 	t_data	imgs[4];
-	int		texWidth;
-	int		texHeight;
-	int		lineHeight;
+	int		tex_width;
+	int		tex_height;
+	int		line_height;
 	int		pitch;
-	int		drawStart;
-	int		drawEnd;
-	double	wallX;
-	int		texX;
-	int		texY;
+	int		draw_start;
+	int		draw_end;
+	double	wallx;
+	int		tex_x;
+	int		tex_y;
 	double	step;
-	double	texPos;
+	double	tex_pos;
 	int		minimap;
 	t_data	plricon[3];
 	int		icon8w;

@@ -12,32 +12,32 @@
 
 #include "cub3d.h"
 
-/*plr->dirY = 0.0; //initial direction vector */
+/*plr->diry = 0.0; //initial direction vector */
 void	init_player(t_player *plr, t_map map)
 {
-	plr->posX = (double) map.player[X] + 0.5001;
-	plr->posY = (double) map.player[Y] + 0.5001;
+	plr->posx = (double) map.player[X] + 0.5001;
+	plr->posy = (double) map.player[Y] + 0.5001;
 	if (map.player[Z] == 'N' || map.player[Z] == 'S')
 	{
-		plr->dirX = 1.0;
-		plr->dirY = 0.0;
-		plr->planeX = 0.0;
-		plr->planeY = 0.66;
+		plr->dirx = 1.0;
+		plr->diry = 0.0;
+		plr->planex = 0.0;
+		plr->planey = 0.66;
 		if (map.player[Z] == 'N')
-			plr->dirX *= -1;
+			plr->dirx *= -1;
 		else
-			plr->planeY *= -1;
+			plr->planey *= -1;
 	}
 	else
 	{
-		plr->dirX = 0.001;
-		plr->dirY = 1.0;
-		plr->planeX = 0.66;
-		plr->planeY = 0.0;
+		plr->dirx = 0.001;
+		plr->diry = 1.0;
+		plr->planex = 0.66;
+		plr->planey = 0.0;
 		if (map.player[Z] == 'W')
 		{
-			plr->dirY *= -1;
-			plr->planeX *= -1;
+			plr->diry *= -1;
+			plr->planex *= -1;
 		}
 	}
 }
@@ -65,22 +65,22 @@ void	init_texture(t_texture *t, t_mlxvars meta, t_map map)
 {
 	init_icon_texture(t, meta);
 	t->imgs[0].img = mlx_xpm_file_to_image(meta.mlx,
-			map.no_file, &t->texWidth, &t->texHeight);
+			map.no_file, &t->tex_width, &t->tex_height);
 	t->imgs[0].addr = mlx_get_data_addr(t->imgs[0].img,
 			&t->imgs[0].bits_per_pixel, &t->imgs[0].line_length,
 			&t->imgs[0].endian);
 	t->imgs[1].img = mlx_xpm_file_to_image(meta.mlx,
-			map.so_file, &t->texWidth, &t->texHeight);
+			map.so_file, &t->tex_width, &t->tex_height);
 	t->imgs[1].addr = mlx_get_data_addr(t->imgs[1].img,
 			&t->imgs[1].bits_per_pixel, &t->imgs[1].line_length,
 			&t->imgs[1].endian);
 	t->imgs[2].img = mlx_xpm_file_to_image(meta.mlx,
-			map.we_file, &t->texWidth, &t->texHeight);
+			map.we_file, &t->tex_width, &t->tex_height);
 	t->imgs[2].addr = mlx_get_data_addr(t->imgs[2].img,
 			&t->imgs[2].bits_per_pixel, &t->imgs[2].line_length,
 			&t->imgs[2].endian);
 	t->imgs[3].img = mlx_xpm_file_to_image(meta.mlx,
-			map.ea_file, &t->texWidth, &t->texHeight);
+			map.ea_file, &t->tex_width, &t->tex_height);
 	t->imgs[3].addr = mlx_get_data_addr(t->imgs[3].img,
 			&t->imgs[3].bits_per_pixel, &t->imgs[3].line_length,
 			&t->imgs[3].endian);

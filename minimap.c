@@ -35,16 +35,16 @@ static void	ft_draw_base(t_mlxvars *meta, t_map map, int zoom)
 
 static void	ft_dram_miniicon(t_mlxvars *meta, int zoom)
 {
-	my_mlx_pixel_put(&meta->main, 41 + (int)(meta->plr.posY * zoom),
-		41 + (int)(meta->plr.posX * zoom), 0x00FF00);
+	my_mlx_pixel_put(&meta->main, 41 + (int)(meta->plr.posy * zoom),
+		41 + (int)(meta->plr.posx * zoom), 0x00FF00);
 	if (zoom > 3)
 	{
-		my_mlx_pixel_put(&meta->main, 42 + (int)(meta->plr.posY * zoom),
-			41 + (int)(meta->plr.posX * zoom), 0x00FF00);
-		my_mlx_pixel_put(&meta->main, 41 + (int)(meta->plr.posY * zoom),
-			42 + (int)(meta->plr.posX * zoom), 0x00FF00);
-		my_mlx_pixel_put(&meta->main, 42 + (int)(meta->plr.posY * zoom),
-			42 + (int)(meta->plr.posX * zoom), 0x00FF00);
+		my_mlx_pixel_put(&meta->main, 42 + (int)(meta->plr.posy * zoom),
+			41 + (int)(meta->plr.posx * zoom), 0x00FF00);
+		my_mlx_pixel_put(&meta->main, 41 + (int)(meta->plr.posy * zoom),
+			42 + (int)(meta->plr.posx * zoom), 0x00FF00);
+		my_mlx_pixel_put(&meta->main, 42 + (int)(meta->plr.posy * zoom),
+			42 + (int)(meta->plr.posx * zoom), 0x00FF00);
 	}
 }
 
@@ -61,15 +61,15 @@ int	ft_draw_minimap(t_mlxvars *meta, t_map map)
 		ft_dram_miniicon(meta, zoom);
 	else if (zoom < 15)
 		mlx_put_image_to_window(meta->mlx, meta->win, meta->tex.plricon[0].img,
-			38 + (int)(meta->plr.posY * zoom),
-			38 + (int)(meta->plr.posX * zoom));
+			38 + (int)(meta->plr.posy * zoom),
+			38 + (int)(meta->plr.posx * zoom));
 	else if (zoom < 20)
 		mlx_put_image_to_window(meta->mlx, meta->win, meta->tex.plricon[1].img,
-			34 + (int)(meta->plr.posY * zoom),
-			34 + (int)(meta->plr.posX * zoom));
+			34 + (int)(meta->plr.posy * zoom),
+			34 + (int)(meta->plr.posx * zoom));
 	else
 		mlx_put_image_to_window(meta->mlx, meta->win, meta->tex.plricon[2].img,
-			26 + (int)(meta->plr.posY * zoom),
-			26 + (int)(meta->plr.posX * zoom));
+			26 + (int)(meta->plr.posy * zoom),
+			26 + (int)(meta->plr.posx * zoom));
 	return (zoom);
 }

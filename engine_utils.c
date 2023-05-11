@@ -32,11 +32,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	get_tex_color(t_texture *tex, int tex_num)
 {
-	if (tex->texX >= 0 && tex->texX < tex->texWidth
-		&& tex->texY >= 0 && tex->texY < tex->texHeight)
+	if (tex->tex_x >= 0 && tex->tex_x < tex->tex_width
+		&& tex->tex_y >= 0 && tex->tex_y < tex->tex_height)
 	{
 		return (*(int *)(tex->imgs[tex_num].addr
-			+ (4 * tex->texWidth * (int)tex->texY) + (4 * (int)tex->texX)));
+			+ (4 * tex->tex_width * (int)tex->tex_y) + (4 * (int)tex->tex_x)));
 	}
 	return (0x0);
 }

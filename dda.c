@@ -18,27 +18,27 @@ void	ft_perform_dda(t_ray *ray, t_map *map)
 {
 	while (ray->hit == 0)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->side_distx < ray->side_disty)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
+			ray->side_distx += ray->delta_distx;
+			ray->mapx += ray->step_x;
 			ray->side = 0;
-			if (ray->rayDirX < 0)
+			if (ray->ray_dirx < 0)
 				ray->dio = 0;
 			else
 				ray->dio = 1;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepY;
+			ray->side_disty += ray->delta_disty;
+			ray->mapy += ray->step_y;
 			ray->side = 1;
-			if (ray->rayDirY < 0)
+			if (ray->ray_diry < 0)
 				ray->dio = 2;
 			else
 				ray->dio = 3;
 		}
-		if (map->map[ray->mapX][ray->mapY] == '1')
+		if (map->map[ray->mapx][ray->mapy] == '1')
 			ray->hit = 1;
 	}
 }
@@ -46,25 +46,25 @@ void	ft_perform_dda(t_ray *ray, t_map *map)
 /* calculate step and initial sideDist */
 static void	ft_calc_step_side_dist(t_player *plr, t_ray *ray)
 {
-	if (ray->rayDirX < 0)
+	if (ray->ray_dirx < 0)
 	{
-		ray->stepX = -1;
-		ray->sideDistX = (plr->posX - ray->mapX) * ray->deltaDistX;
+		ray->step_x = -1;
+		ray->side_distx = (plr->posx - ray->mapx) * ray->delta_distx;
 	}
 	else
 	{
-		ray->stepX = 1;
-		ray->sideDistX = (ray->mapX + 1.0 - plr->posX) * ray->deltaDistX;
+		ray->step_x = 1;
+		ray->side_distx = (ray->mapx + 1.0 - plr->posx) * ray->delta_distx;
 	}
-	if (ray->rayDirY < 0)
+	if (ray->ray_diry < 0)
 	{
-		ray->stepY = -1;
-		ray->sideDistY = (plr->posY - ray->mapY) * ray->deltaDistY;
+		ray->step_y = -1;
+		ray->side_disty = (plr->posy - ray->mapy) * ray->delta_disty;
 	}
 	else
 	{
-		ray->stepY = 1;
-		ray->sideDistY = (ray->mapY + 1.0 - plr->posY) * ray->deltaDistY;
+		ray->step_y = 1;
+		ray->side_disty = (ray->mapy + 1.0 - plr->posy) * ray->delta_disty;
 	}
 }
 
@@ -73,19 +73,19 @@ static void	ft_calc_step_side_dist(t_player *plr, t_ray *ray)
 /* - length of ray from one x or y-side to next x or y-side */
 void	ft_set_dda(int x, t_player *plr, t_ray *ray)
 {
-	ray->cameraX = 2 * x / (double)WIN_WIDTH - 1;
-	ray->rayDirX = plr->dirX + plr->planeX * ray->cameraX;
-	ray->rayDirY = plr->dirY + plr->planeY * ray->cameraX;
-	ray->mapX = (int)plr->posX;
-	ray->mapY = (int)plr->posY;
-	if (ray->rayDirX == 0)
-		ray->deltaDistX = 1e30;
+	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
+	ray->ray_dirx = plr->dirx + plr->planex * ray->camera_x;
+	ray->ray_diry = plr->diry + plr->planey * ray->camera_x;
+	ray->mapx = (int)plr->posx;
+	ray->mapy = (int)plr->posy;
+	if (ray->ray_dirx == 0)
+		ray->delta_distx = 1e30;
 	else
-		ray->deltaDistX = fabs(1 / ray->rayDirX);
-	if (ray->rayDirX == 0)
-		ray->deltaDistY = 1e30;
+		ray->delta_distx = fabs(1 / ray->ray_dirx);
+	if (ray->ray_dirx == 0)
+		ray->delta_disty = 1e30;
 	else
-		ray->deltaDistY = fabs(1 / ray->rayDirY);
+		ray->delta_disty = fabs(1 / ray->ray_diry);
 	ft_calc_step_side_dist(plr, ray);
 	ray->hit = 0;
 }
