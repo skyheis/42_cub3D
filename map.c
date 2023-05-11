@@ -132,7 +132,8 @@ void	ft_get_map(t_map *map, char *filename)
 	printf("ok player\n");
 	ft_checkmap(map);
 	printf("ok map\n");
-	printf("player:\nx %i\ny %i\nv %c\n", map->player[0], map->player[1], (char) map->player[2]);
+	printf("player:\nx %i\ny %i\nv %c\n", map->player[0],
+		map->player[1], (char) map->player[2]);
 }
 
 void	ft_printmatrix(char **mat)
@@ -162,6 +163,7 @@ int	main(int ac, char **av)
 	printf("C  -> '%d'\n", map.cieling_color);
 	printf("width '%i'\n", map.width);
 	printf("hight '%i'\n", map.hight);
-	printf("player:\nx %i\ny %i\nv %c\n", map.player[0], map.player[1], (char) map.player[2]);
+	printf("player:\nx %i\ny %i\nv %c\n", map.player[0], map.player[1],
+		(char) map.player[2]);
 	ft_printmatrix(map.map);
 }*/

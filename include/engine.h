@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef ENGINE_H
 # define ENGINE_H
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void	*img;
 	char	*addr;
@@ -23,86 +22,111 @@ typedef struct	s_data
 	int		endian;
 }				t_data;
 
-typedef struct	s_player
+typedef struct s_player
 {
-	/*PLAYER DATA*/
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	double	moveSpeed;
-	double	rotSpeed;
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+	double	move_speed;
+	double	rot_speed;
 }				t_player;
 
-typedef struct	s_ray
-{
-	/*RAY DATA*/
-	//calculate ray position and direction
-	double cameraX;//x-coordinate in camera space
-	double rayDirX;
-	double rayDirY;
+/* 	//calculate ray position and direction
+	double camera_x;//x-coordinate in camera space
+	double ray_dirx;
+	double ray_diry;
 	//which box of the map we're in
-	int mapX;
-	int mapY;
+	int mapx;
+	int mapy;
 	//length of ray from current position to next x or y-side
-	double sideDistX;
-	double sideDistY;
+	double side_distx;
+	double side_disty;
 	//length of ray from one x or y-side to next x or y-side
-	double deltaDistX;
-	double deltaDistY;
-	double perpWallDist;
+	double delta_distx;
+	double delta_disty;
+	double perp_walldist;
 	//what direction to step in x or y-direction (either +1 or -1)
-	int stepX;
-	int stepY;
+	int stepx;
+	int step_y;
 	int hit; //was there a wall hit?
 	int side; //was a NS or a EW wall hit?
 	int dio;
 	double time; //time of current frame
-	double oldTime; //time of previous frame
+	double oldtime; //time of previous frame */
+typedef struct s_ray
+{
+	double	camera_x;
+	double	ray_dirx;
+	double	ray_diry;
+	int		mapx;
+	int		mapy;
+	double	side_distx;
+	double	side_disty;
+	double	delta_distx;
+	double	delta_disty;
+	double	perp_walldist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		dio;
+	double	time;
+	double	oldtime;
 }				t_ray;
 
-typedef struct	s_texture
-{
-	t_data imgs[4];
-	int	texWidth;
-	int texHeight;
-	int lineHeight;
-	int pitch;
-	//calculate lowest and highest pixel to fill in current stripe
-	int drawStart;
-	int drawEnd;
-	//calculate value of wallX
-	double wallX; //where exactly the wall was hit
+/* 	//calculate lowest and highest pixel to fill in current stripe
+	int draw_start;
+	int draw_end;
+	//calculate value of wallx
+	double wallx; //where exactly the wall was hit
 	//x coordinate on the texture
-	int texX;
-	int texY;
+	int tex_x;
+	int tex_y;
 	// How much to increase the texture coordinate per screen pixel
 	double step;
 	// Starting texture coordinate
-	double texPos;
-	int	minimap;
+	double tex_pos;
+	int	minimap; */
+typedef struct s_texture
+{
+	t_data	imgs[4];
+	int		tex_width;
+	int		tex_height;
+	int		line_height;
+	int		pitch;
+	int		draw_start;
+	int		draw_end;
+	double	wallx;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
+	int		minimap;
 	t_data	plricon[3];
-	int icon8w;
-	int icon8h;
-	int icon16w;
-	int icon16h;
-	int icon32w;
-	int icon32h;
-	int mapf;
+	int		icon8w;
+	int		icon8h;
+	int		icon16w;
+	int		icon16h;
+	int		icon32w;
+	int		icon32h;
+	int		mapf;
+	int		picx;
+	int		picy;
 }				t_texture;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char	**map;
 	char	*map_memory;
 	int		width;
 	int		hight;
-	char	*no_file;;
-	char	*so_file;;
-	char	*we_file;;
-	char	*ea_file;;
+	char	*no_file;
+	char	*so_file;
+	char	*we_file;
+	char	*ea_file;
 	int		floor_color;
 	int		cieling_color;
 	int		player[3];

@@ -25,7 +25,7 @@ DIROBJS = obj/
 
 FLSRCS = main.c dda.c engine.c engine_utils.c key_hooks.c wall_line.c \
 		 map.c check_map.c check_player.c map_split.c map_utils.c \
-		 handle_error.c minimap.c
+		 handle_exit.c minimap.c mouse_moving.c move_player.c
 
 FLOBJS = ${FLSRCS:.c=.o}
 
@@ -73,7 +73,7 @@ clean:
 	@echo "$(RED)All $(CYAN)$(NAME)$(RED)'s objects removed with $(WHITE)${RM}$(DEF_COLOR) 🧹" 
 
 fclean: clean
-	@${RM} ${PRNAME} archive/libft.a archive/libmlx.a
+	@${RM} ${PRNAME} archive/libft.a archive/libmlx.a include/mlx.h
 	@echo "$(RED)..and $(CYAN)${NAME} $(RED)as been removed$(DEF_COLOR) 🚮"
 
 libft:

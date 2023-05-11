@@ -64,7 +64,7 @@ void	ft_get_fc_color(t_map *map, char *mapmem, int *i, int *color)
 	{
 		atoi = ft_atoi(&mapmem[*i]);
 		if (atoi < 0 || atoi > 255)
-			exit(1); //ft_exit_map
+			ft_exit_map(map, "Error: color wrong number\n");
 		*color |= atoi << bits;
 		bits -= 8;
 		ft_fc_color_next(map, mapmem, i, bits);

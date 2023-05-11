@@ -1,26 +1,26 @@
 NO
 plrDirX -1.000000
 plrDirY 0.000000
-planeX 0.000000
-planeY 0.660000
+planex 0.000000
+planey 0.660000
 
 SO
 plrDirX 0.998295
 plrDirY -0.058374
-planeX -0.038527
-planeY -0.658875
+planex -0.038527
+planey -0.658875
 
 EA
 plrDirX 0.026793
 plrDirY 0.999641
-planeX 0.659763
-planeY -0.017683
+planex 0.659763
+planey -0.017683
 
 WE
 plrDirX -0.054566
 plrDirY -0.998511
-planeX -.659052
-planeY 0.035354
+planex -.659052
+planey 0.035354
 
 frameTime: 0.031000
 frameTime: 0.031000

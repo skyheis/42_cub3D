@@ -13,15 +13,15 @@
 #ifndef KEYNUM_H
 # define KEYNUM_H
 
-# define B_ESC 65307
-# define TAB_KEY 65289
-# define MIN_KEY 45
-# define MAG_KEY 61
+# define B_ESC		65307
+# define TAB_KEY	65289
+# define MIN_KEY	45
+# define MAG_KEY	61
 
-#define UP 65362
-#define LEFT 65361
-#define RIGHT 65363
-#define DOWN 65364
+# define UP		65362
+# define LEFT	65361
+# define RIGHT	65363
+# define DOWN	65364
 
 # define W_KEY 119
 # define A_KEY 97

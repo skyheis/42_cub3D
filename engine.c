@@ -23,24 +23,26 @@ static void	ft_reset_main_img(t_data *main, t_mlxvars meta)
 
 void	ft_pickaxe(t_mlxvars *meta)
 {
-	int x;
-	int y;
-	int picx;
-	int picy;
-	int color;
-	t_data barr;
+	int		x;
+	int		y;
+	int		color;
+	t_data	barr;
 
-	barr.img = mlx_xpm_file_to_image(meta->mlx, "pics/pickaxe256.xpm", &picx, &picy);
-	barr.addr = mlx_get_data_addr(barr.img, &barr.bits_per_pixel, &barr.line_length, &barr.endian);
+	barr.img = mlx_xpm_file_to_image(meta->mlx, "pics/pickaxe256.xpm",
+			&meta->tex.picx, &meta->tex.picy);
+	barr.addr = mlx_get_data_addr(barr.img, &barr.bits_per_pixel,
+			&barr.line_length, &barr.endian);
 	y = 0;
 	while (y < 256)
 	{
 		x = 0;
 		while (x < 256)
 		{
-			color = *(int*) (barr.addr + (4 * picx  * x) + (4 * (int) y));
+			color = *(int *)(barr.addr
+					+ (4 * meta->tex.picx * x) + (4 * (int) y));
 			if (color != 0x0)
-				my_mlx_pixel_put(&meta->main, WIN_WIDTH - 256 + y, WIN_HEIGHT - 256 + x, color);
+				my_mlx_pixel_put(&meta->main,
+					WIN_WIDTH - 256 + y, WIN_HEIGHT - 256 + x, color);
 			x++;
 		}
 		y++;
@@ -48,11 +50,10 @@ void	ft_pickaxe(t_mlxvars *meta)
 	mlx_destroy_image(meta->mlx, barr.img);
 }
 
-int big_draw(void *voidmeta)
+int	big_draw(void *voidmeta)
 {
 	int			x;
 	t_mlxvars	*meta;
-	double		frameTime;
 
 	x = 0;
 	meta = (t_mlxvars *)voidmeta;
@@ -62,28 +63,23 @@ int big_draw(void *voidmeta)
 	{
 		ft_set_dda(x, &meta->plr, &meta->ray);
 		ft_perform_dda(&meta->ray, &meta->map);
-
 		ft_calc_wall_ray(&meta->plr, &meta->ray, &meta->tex);
 		ft_draw_wall_line(x, meta, &meta->ray, &meta->tex);
-
 		x++;
 	}
 	ft_pickaxe(meta);
-	//timing for input and FPS counter
-	meta->ray.oldTime = meta->ray.time;
-	meta->ray.time = get_time();
-	frameTime = (meta->ray.time - meta->ray.oldTime) / 1000.0; //frametime is the time this frame has taken, in seconds
-	//speed modifiers
-//	printf("frameTime: %f\n", frameTime);
-	//meta->plr.moveSpeed = frameTime * 10.0; //the constant value is in squares/second
-	//meta->plr.rotSpeed = frameTime * 8.0; //the constant value is in radians/second
-	(void) frameTime;
-	meta->plr.moveSpeed = 0.1; //the constant value is in squares/second
-	meta->plr.rotSpeed = 0.09; //the constant value is in radians/second
-	mlx_put_image_to_window(meta->mlx, meta->win, meta->main.img, 0,0);
+	meta->plr.move_speed = 0.1;
+	meta->plr.rot_speed = 0.09;
+	mlx_put_image_to_window(meta->mlx, meta->win, meta->main.img, 0, 0);
 	if (meta->tex.minimap)
 		ft_draw_minimap(meta, meta->map);
 	if (meta->mouse == true)
 		mlx_mouse_move(meta->mlx, meta->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	return (0);
 }
+
+/* 	double		frameTime;
+	meta->ray.oldtime = meta->ray.time;
+	meta->ray.time = get_time();
+	frameTime = (meta->ray.time - meta->ray.oldtime) / 1000.0;
+	(void) frameTime; */
